@@ -2,7 +2,7 @@ nav {
   display: flex;
   align-items: center;
   padding: 0 10px;
-  // orange background-color
+  gap: 1rem;
   background-color: #f9a826;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: sticky;
@@ -29,7 +29,6 @@ nav {
   }
 
   .nav-search {
-    margin: 0 2rem;
     background: #fff;
     border-radius: 5px;
     padding: 2px;
@@ -102,4 +101,8 @@ nav {
     cursor: pointer;
     display: none;
   }
+}
+
+.content{
+    padding: 2rem 1rem;
 }
