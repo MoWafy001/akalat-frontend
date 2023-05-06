@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 export const Layout = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
+
+  const [showMenu, setShowMenu] = useState(false);
+  const [showSearchOptions, setShowSearchOptions] = useState(false);
 
   return (
     <>
@@ -16,16 +20,24 @@ export const Layout = () => {
         </div>
 
         {isHome && (
-          <div className="nav-search">
+          <div className="nav-search menu-holder">
             <button>
               <img src="/zoomer.png" alt="search" />
             </button>
 
             <input type="text" placeholder="Search" />
 
-            <button className="humberger-menu">
+            <button className="humberger-menu" onClick={()=>{setShowSearchOptions(!showSearchOptions)}}>
               <img src="/levels-controls.png" alt="filter" />
             </button>
+
+            {showSearchOptions && (
+              <div className="menu search hamberger">
+                <Link to="/resturants">Resturants</Link>
+                <Link to="/delivery">Delivery</Link>
+                <Link to="/meals">Meals</Link>
+              </div>
+            )}
           </div>
         )}
 
@@ -55,10 +67,23 @@ export const Layout = () => {
             </li>
           </Link>
           {/* hamburger menu */}
-          <li>
-            <button>
+          <li className="menu-holder">
+            <button
+              onClick={() => {
+                setShowMenu(!showMenu);
+              }}
+            >
               <img src="menu.png" alt="menu" />
             </button>
+            {showMenu && (
+              <div className="menu hamberger">
+                <Link to="">My Orders</Link>
+                <Link to="">My Reviews</Link>
+                <div className="divider"></div>
+                <Link to="">My Account</Link>
+                <Link to="">Logout</Link>
+              </div>
+            )}
           </li>
         </ul>
       </nav>

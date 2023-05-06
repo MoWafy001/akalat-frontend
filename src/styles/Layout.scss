@@ -257,3 +257,39 @@ footer {
     font-size: 1.2rem;
   }
 }
+
+.menu-holder {
+  position: relative;
+
+  .menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    color: #000;
+    background: #fff;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    border: 1px solid #000;
+
+    a {
+      padding: 0.7rem 2rem;
+      text-align: center;
+      min-width: max-content;
+      text-decoration: none;
+      color: inherit;
+      font-weight: bold;
+
+      &:hover {
+        background: #2222
+      }
+    }
+
+    .divider{
+      background: #000;
+      height: 1px;
+    }
+  }
+  .search{
+    width: 99.5%;
+  }
+}
