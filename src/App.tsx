@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
+import "react-slideshow-image/dist/styles.css";
 import { Layout } from "./pages/Layout";
+import { Home } from "./pages/Home";
 
 function App() {
   return (
@@ -11,7 +13,7 @@ function App() {
         <Route path="/register" element={<></>} />
 
         <Route path="/" element={<Layout />}>
-          <Route index element={<>home</>} />
+          <Route index element={<Home />} />
           <Route path="resturants" element={<>resturants</>} />
           <Route path="delivery" element={<>delivery</>} />
           <Route path="meals" element={<>meals</>} />
