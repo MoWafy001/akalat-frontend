@@ -31,31 +31,29 @@ export const Layout = () => {
 
         {/* nav links 1 */}
         <ul className="nav-links">
-          <li>
-            <Link to="/resturants">Resturants</Link>
-          </li>
-          <li>
-            <Link to="/delivery">Delivery</Link>
-          </li>
-          <li>
-            <Link to="/meals">Meals</Link>
-          </li>
+          <Link to="/resturants">
+            <li>Resturants</li>
+          </Link>
+          <Link to="/delivery">
+            <li>Delivery</li>
+          </Link>
+          <Link to="/meals">
+            <li>Meals</li>
+          </Link>
         </ul>
 
         {/* nav links 2 */}
         <ul className="nav-links nav-right">
-          <li>
-            <Link to="/wishlist">
+          <Link to="/wishlist">
+            <li>
               <img src="/heart-outline-shape.png" alt="wishlist" />
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/cart">
+            </li>
+          </Link>
+          <Link to="/cart">
+            <li>
               <img src="shopping-cart.png" alt="cart" />
-            </Link>
-          </li>
-
+            </li>
+          </Link>
           {/* hamburger menu */}
           <li>
             <button>
