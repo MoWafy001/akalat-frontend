@@ -4,6 +4,12 @@ h1 {
   margin-bottom: 2rem;
 }
 
+.home-sections{
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
 .section {
   background: #ffa515ad;
   padding: 2rem;
