@@ -1,4 +1,5 @@
 @import "Home";
+@import "Cart";
 
 nav {
   display: flex;
@@ -280,16 +281,20 @@ footer {
       font-weight: bold;
 
       &:hover {
-        background: #2222
+        background: #2222;
       }
     }
 
-    .divider{
+    .divider {
       background: #000;
       height: 1px;
     }
   }
-  .search{
+  .search {
     width: 99.5%;
   }
+}
+
+.sliced {
+  text-decoration: line-through;
 }

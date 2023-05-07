@@ -4,12 +4,14 @@ export const Card = ({
   name,
   rate,
   showTools,
+  showRemove = false,
 }: {
   price?: string;
   ogPrice?: string;
   name: string;
   rate: string;
   showTools: boolean;
+  showRemove?: boolean;
 }) => {
   return (
     <div className="card">
@@ -35,6 +37,14 @@ export const Card = ({
             <button className="cart-add">
               <img src="/shopping-cart.png" alt="cart" />
             </button>
+          </div>
+        )}
+
+        {showRemove && (
+          <div className="card-options">
+            <div className="quantity" style={{ border: "none" }}>
+              <button>-</button>
+            </div>
           </div>
         )}
       </div>
