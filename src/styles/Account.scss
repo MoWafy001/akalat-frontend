@@ -1,0 +1,59 @@
+.account-content{
+    position: relative;
+    background: #ffa515ad;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    border-radius: 2rem;
+
+    img{
+        width: 13rem;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+    }
+
+    .account-info{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .account-field{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+            label{
+                width: 100px;
+                text-align: center;
+                font-weight: bold;
+            }
+            input{
+                width: 30rem;
+                padding: 0.5rem 1rem;
+                border-radius: 10px;
+                border: none;
+                outline: none;
+                box-shadow: 0 1px 5px #0000005c;
+
+                // disable input
+                &:disabled{
+                    background: #fff;
+                }
+            }
+        }
+    }
+
+    .edit-button{
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+
+        img{
+            width: 2.5rem;
+            cursor: pointer;
+            border-radius: 0;
+        }
+    }
+}

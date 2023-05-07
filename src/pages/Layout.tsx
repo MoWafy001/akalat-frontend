@@ -80,7 +80,7 @@ export const Layout = () => {
                 <Link to="/orders">My Orders</Link>
                 <Link to="/reviews">My Reviews</Link>
                 <div className="divider"></div>
-                <Link to="">My Account</Link>
+                <Link to="/account">My Account</Link>
                 <Link to="">Logout</Link>
               </div>
             )}

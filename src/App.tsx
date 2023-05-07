@@ -10,6 +10,7 @@ import { WishList } from "./pages/WishList";
 import { Cart } from "./pages/MyCart";
 import { Orders } from "./pages/Orders";
 import { Reviews } from "./pages/Reviews";
+import { Account } from "./pages/account";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="orders" element={<Orders />} />
           <Route path="reviews" element={<Reviews />} />
-          <Route path="account" element={<>account</>} />
+          <Route path="account" element={<Account />} />
         </Route>
 
         {/* Not Found */}
