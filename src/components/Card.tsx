@@ -5,6 +5,7 @@ export const Card = ({
   rate,
   showTools,
   showRemove = false,
+  review,
 }: {
   price?: string;
   ogPrice?: string;
@@ -12,6 +13,7 @@ export const Card = ({
   rate: string;
   showTools: boolean;
   showRemove?: boolean;
+  review?: string;
 }) => {
   return (
     <div className="card">
@@ -22,6 +24,14 @@ export const Card = ({
           <span className="og-price">{ogPrice}</span>
         </div>
         <span className="card-name">{name}</span>
+
+        {review && (
+          <div className="card-review">
+            <span className="review-title">Review:</span>
+            <span className="review-body">{review}</span>
+          </div>
+        )}
+
         <span className="card-rate">{rate}</span>
 
         {showTools && (

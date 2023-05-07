@@ -9,6 +9,7 @@ import { Meals } from "./pages/Meals";
 import { WishList } from "./pages/WishList";
 import { Cart } from "./pages/MyCart";
 import { Orders } from "./pages/Orders";
+import { Reviews } from "./pages/Reviews";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
           <Route path="wishlist" element={<WishList />} />
           <Route path="cart" element={<Cart />} />
           <Route path="orders" element={<Orders />} />
-          <Route path="reviews" element={<>my-reviews</>} />
+          <Route path="reviews" element={<Reviews />} />
           <Route path="account" element={<>account</>} />
         </Route>
 

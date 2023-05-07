@@ -78,7 +78,7 @@ export const Layout = () => {
             {showMenu && (
               <div className="menu hamberger">
                 <Link to="/orders">My Orders</Link>
-                <Link to="">My Reviews</Link>
+                <Link to="/reviews">My Reviews</Link>
                 <div className="divider"></div>
                 <Link to="">My Account</Link>
                 <Link to="">Logout</Link>

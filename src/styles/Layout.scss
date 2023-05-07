@@ -209,6 +209,21 @@ footer {
       }
     }
 
+    .card-review{
+      font-size: 0.9rem;
+      text-align: left;
+      padding: 1rem;
+      .review-title{
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      .review-body{
+        font-size: 0.7rem;
+        padding-left: 1rem;
+        color: gray;
+      }
+    }
+
     .card-options {
       display: flex;
       flex-direction: row;
