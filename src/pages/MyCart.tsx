@@ -35,9 +35,9 @@ export const Cart = () => {
           marginBottom: "4rem",
         }}
       >
-        My WishList{" "}
+        My Cart
         <img
-          src="/heart-outline-shape.png"
+          src="/shopping-cart.png"
           alt="Heart"
           width={30}
           height={30}
