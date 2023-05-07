@@ -1,13 +1,50 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { config } from "../config";
 
 export const Login = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    return await fetch(form.action, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          toast.success("Login successful");
+          localStorage.setItem("token", res.token);
+          localStorage.setItem("user", JSON.stringify(res.record));
+          return navigate("/");
+        } else {
+          toast.error(res.error);
+        }
+      })
+      .catch((err) => {
+        toast.error("Something went wrong");
+      });
+  };
+
   return (
     <div className="auth-container">
       <div className="banner-half">
         <img src="/akalat-logo.png" />
         <h1>Akalat</h1>
       </div>
-      <div className="auth-input">
+      <form
+        className="auth-input"
+        action={config.api.user.login}
+        onSubmit={handleLogin}
+      >
         <h2>Login</h2>
         <div className="inputs">
           <input type="text" name="email" placeholder="email" />
@@ -24,7 +61,7 @@ export const Login = () => {
         <div className="notice">
           Don't have an account? <Link to="/register">Register</Link>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

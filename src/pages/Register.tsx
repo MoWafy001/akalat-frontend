@@ -1,20 +1,77 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { config } from "../config";
+import { toast } from "react-toastify";
 
 export const Register = () => {
+  const navigate = useNavigate();
+
+  const handleRegister = async(e: any) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const passwordConfirm = form["password-confirm"].value;
+    const address = form.address.value;
+    const phone = form.phone.value;
+
+    if (password !== passwordConfirm) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    return await fetch(form.action, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password, address, phone }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          toast.success("Account created successfully");
+          toast.info("Please login to continue");
+          return navigate("/login");
+        } else {
+          toast.error(res.error);
+        }
+      })
+      .catch((err) => {
+        toast.error("Something went wrong");
+      });
+  };
+
   return (
     <div className="auth-container">
       <div className="banner-half">
         <img src="/akalat-logo.png" />
         <h1>Akalat</h1>
       </div>
-      <div className="auth-input">
+      <form
+        className="auth-input"
+        action={config.api.user.register}
+        method="POST"
+        onSubmit={handleRegister}
+      >
         <h2>Register</h2>
         <div className="inputs">
-          <input type="text" name="email" placeholder="email" />
-          <input type="password" name="password" placeholder="password" />
-          <input type="password" placeholder="password confirm" />
-          <input type="text" name="address" placeholder="address" />
-          <input type="text" name="phone" placeholder="phone" />
+          <input required type="text" name="name" placeholder="name" />
+          <input required type="email" name="email" placeholder="email" />
+          <input
+            required
+            type="password"
+            name="password"
+            placeholder="password"
+          />
+          <input
+            required
+            type="password"
+            placeholder="password confirm"
+            name="password-confirm"
+          />
+          <input required type="text" name="address" placeholder="address" />
+          <input required type="text" name="phone" placeholder="phone" />
         </div>
         <Link to="/forgot" className="forgot-link">
           Forgot password?
@@ -27,7 +84,7 @@ export const Register = () => {
         <div className="notice">
           Do you have an account? <Link to="/login">Login</Link>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
