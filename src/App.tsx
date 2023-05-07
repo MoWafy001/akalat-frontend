@@ -1,4 +1,10 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import "./App.scss";
 import "react-slideshow-image/dist/styles.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,19 +20,32 @@ import { Reviews } from "./pages/Reviews";
 import { Account } from "./pages/account";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("token") ? true : false
+  );
+
   return (
     <>
       <ToastContainer />
-      <BrowserRouter>
-        <Routes>
-          {/* Login & Register */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+      <Routes>
+        {/* route to login if not logged in */}
 
-          <Route path="/" element={<Layout />}>
+        {/* Login & Register */}
+        <Route
+          path="/login"
+          element={<Login setIsLoggedIn={setIsLoggedIn} />}
+        />
+        <Route path="/register" element={<Register />} />
+
+        {!isLoggedIn && toast("You need to login first1") && (
+          <Route path="*" element={<Navigate to="/login" />} />
+        )}
+        {isLoggedIn && (
+          <Route path="/" element={<Layout setIsLoggedIn={setIsLoggedIn} />}>
             <Route index element={<Home />} />
             <Route path="resturants" element={<Restaurants />} />
             <Route path="delivery" element={<Deliveries />} />
@@ -37,11 +56,11 @@ function App() {
             <Route path="reviews" element={<Reviews />} />
             <Route path="account" element={<Account />} />
           </Route>
+        )}
 
-          {/* Not Found */}
-          <Route path="*" element={<>not found</>} />
-        </Routes>
-      </BrowserRouter>
+        {/* Not Found */}
+        <Route path="*" element={<>not found</>} />
+      </Routes>
     </>
   );
 }

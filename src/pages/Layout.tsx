@@ -1,12 +1,21 @@
-import { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
-
-export const Layout = () => {
+import { useEffect, useState } from "react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+export const Layout = ({ setIsLoggedIn }: { setIsLoggedIn: Function }) => {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
+  const navigate = useNavigate();
+
   const [showMenu, setShowMenu] = useState(false);
   const [showSearchOptions, setShowSearchOptions] = useState(false);
+
+  const handleLogout = (e: any) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
 
   return (
     <>
@@ -27,7 +36,12 @@ export const Layout = () => {
 
             <input type="text" placeholder="Search" />
 
-            <button className="humberger-menu" onClick={()=>{setShowSearchOptions(!showSearchOptions)}}>
+            <button
+              className="humberger-menu"
+              onClick={() => {
+                setShowSearchOptions(!showSearchOptions);
+              }}
+            >
               <img src="/levels-controls.png" alt="filter" />
             </button>
 
@@ -81,7 +95,9 @@ export const Layout = () => {
                 <Link to="/reviews">My Reviews</Link>
                 <div className="divider"></div>
                 <Link to="/account">My Account</Link>
-                <Link to="">Logout</Link>
+                <Link to="" onClick={handleLogout}>
+                  Logout
+                </Link>
               </div>
             )}
           </li>
