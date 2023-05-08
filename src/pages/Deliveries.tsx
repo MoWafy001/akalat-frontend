@@ -1,30 +1,23 @@
+import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
+import { listDeliveries } from "../api/user";
 
 export const Deliveries = () => {
-  const testDelivery = Card({
-    name: "Ahmed Ali",
-    rate: "⭐ ⭐ ⭐ ⭐",
-    showTools: false,
-  });
+  const [deliveries, setDeliveries] = useState([]);
 
-  const deliveries = [
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-  ];
+  useEffect(() => {
+    listDeliveries().then((data) => {
+      setDeliveries(
+        data.record.map((delivery: any) => {
+          return Card({
+            name: delivery.name,
+            rate: "⭐".repeat(delivery.rate),
+            showTools: false,
+          });
+        })
+      );
+    });
+  }, []);
 
   return (
     <>

@@ -3,45 +3,54 @@
 // 2. Resturants
 // 3. Delivery
 
-import { Slide } from "react-slideshow-image";
 import { Card } from "../components/Card";
+import Slider from "react-slick";
+
+import { useEffect, useState } from "react";
+import { listDeliveries, listMeals, listRestaurants } from "../api/user";
 
 export const Home = () => {
-  const testMeal = Card({
-    price: "31 L.E",
-    ogPrice: "41 L.E",
-    name: "Chicken shawarma",
-    rate: "⭐ ⭐ ⭐ ⭐",
-    showTools: true,
-  });
+  const [meals, setMeals] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
+  const [deliveries, setDeliveries] = useState([]);
 
-  const testRestaurant = Card({
-    name: "Sultan Ayub",
-    rate: "⭐ ⭐ ⭐ ⭐",
-    showTools: false,
-  });
+  useEffect(() => {
+    listMeals().then((data) => {
+      setMeals(
+        data.record.map((meal: any) => {
+          return Card({
+            name: meal.name,
+            rate: "⭐".repeat(meal.rate),
+            showTools: true,
+          });
+        })
+      );
+    });
 
-  const testDelivery = Card({
-    name: "Khaled Ali",
-    rate: "⭐ ⭐ ⭐ ⭐",
-    showTools: false,
-  });
+    listRestaurants().then((data) => {
+      setRestaurants(
+        data.record.map((restaurant: any) => {
+          return Card({
+            name: restaurant.name,
+            rate: "⭐".repeat(restaurant.rate),
+            showTools: false,
+          });
+        })
+      );
+    });
 
-  const meals = [testMeal, testMeal, testMeal, testMeal, testMeal];
-  const restaurants = [
-    testRestaurant,
-    testRestaurant,
-    testRestaurant,
-    testRestaurant,
-    testRestaurant,
-  ];
-  const deliveries = [
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-    testDelivery,
-  ];
+    listDeliveries().then((data) => {
+      setDeliveries(
+        data.record.map((delivery: any) => {
+          return Card({
+            name: delivery.name,
+            rate: "⭐".repeat(delivery.rate),
+            showTools: false,
+          });
+        })
+      );
+    });
+  }, []);
 
   return (
     <>
@@ -50,29 +59,29 @@ export const Home = () => {
       <div className="home-sections">
         <div className="section">
           <h2>Meals</h2>
-          <Slide slidesToScroll={4} slidesToShow={4} autoplay={false}>
+          <Slider slidesToScroll={4} slidesToShow={4} autoplay={true}>
             {meals.map((meal, index) => (
               <div key={index}>{meal}</div>
             ))}
-          </Slide>
+          </Slider>
         </div>
 
         <div className="section">
           <h2>Restaurants</h2>
-          <Slide slidesToScroll={4} slidesToShow={4} autoplay={false}>
+          <Slider slidesToScroll={4} slidesToShow={4} autoplay={false}>
             {restaurants.map((rest, index) => (
               <div key={index}>{rest}</div>
             ))}
-          </Slide>
+          </Slider>
         </div>
 
         <div className="section">
           <h2>Delivery</h2>
-          <Slide slidesToScroll={4} slidesToShow={4} autoplay={false}>
+          <Slider slidesToScroll={4} slidesToShow={4} autoplay={false}>
             {deliveries.map((delivery, index) => (
               <div key={index}>{delivery}</div>
             ))}
-          </Slide>
+          </Slider>
         </div>
       </div>
     </>

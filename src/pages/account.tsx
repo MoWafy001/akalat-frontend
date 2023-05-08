@@ -10,7 +10,7 @@ export const Account = () => {
 
       <div className="account-content">
         <div className="edit-button">
-          <img src="/edit-interface-symbol.png" />
+          <img src="/edit-interface-symbol.png" alt="edit" />
         </div>
 
         <div className="prof-image">

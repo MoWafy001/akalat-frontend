@@ -6,6 +6,15 @@ export const config = {
     user: {
       register: API_URL + "user/register",
       login: API_URL + "user/login",
+      meal: {
+        list: API_URL + "user/meal/list",
+      },
+      restaurant: {
+        list: API_URL + "user/restaurant/list",
+      },
+      delivery: {
+        list: API_URL + "user/delivery/list",
+      },
     },
   },
 };

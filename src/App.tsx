@@ -1,12 +1,7 @@
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.scss";
-import "react-slideshow-image/dist/styles.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
@@ -21,7 +16,7 @@ import { Account } from "./pages/account";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { ToastContainer, toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -32,8 +27,6 @@ function App() {
     <>
       <ToastContainer />
       <Routes>
-        {/* route to login if not logged in */}
-
         {/* Login & Register */}
         <Route
           path="/login"

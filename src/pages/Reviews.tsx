@@ -1,4 +1,3 @@
-import { Slide } from "react-slideshow-image";
 import { Card } from "../components/Card";
 
 export const Reviews = () => {

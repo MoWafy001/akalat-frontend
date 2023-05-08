@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 export const Layout = ({ setIsLoggedIn }: { setIsLoggedIn: Function }) => {
   const location = useLocation();

@@ -1,5 +1,5 @@
-import { Slide } from "react-slideshow-image";
 import { Card } from "../components/Card";
+import Slider from "react-slick";
 
 export const Orders = () => {
   const testMeal = Card({
@@ -71,11 +71,11 @@ export const Orders = () => {
               </div>
             </div>
             <div className="col">
-              <Slide slidesToScroll={2} slidesToShow={2} autoplay={true}>
+              <Slider slidesToScroll={2} slidesToShow={2} autoplay={true}>
                 {order.meals.map((meal, index) => (
                   <div key={index}>{meal}</div>
                 ))}
-              </Slide>
+              </Slider>
               <span className="status">Accepted</span>
             </div>
           </div>

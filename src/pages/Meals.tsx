@@ -1,32 +1,23 @@
+import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
+import { listMeals } from "../api/user";
 
 export const Meals = () => {
-  const testMeal = Card({
-    price: "30 L.E",
-    ogPrice: "40 L.E",
-    name: "Chicken shawarma",
-    rate: "⭐ ⭐ ⭐ ⭐",
-    showTools: true,
-  });
+  const [meals, setMeals] = useState([]);
 
-  const meals = [
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-    testMeal,
-  ];
+  useEffect(() => {
+    listMeals().then((data) => {
+      setMeals(
+        data.record.map((meal: any) => {
+          return Card({
+            name: meal.name,
+            rate: "⭐".repeat(meal.rate),
+            showTools: true,
+          });
+        })
+      );
+    });
+  }, []);
 
   return (
     <>

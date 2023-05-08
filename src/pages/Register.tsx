@@ -45,7 +45,7 @@ export const Register = () => {
   return (
     <div className="auth-container">
       <div className="banner-half">
-        <img src="/akalat-logo.png" />
+        <img src="/akalat-logo.png" alt="akalat logo" />
         <h1>Akalat</h1>
       </div>
       <form
