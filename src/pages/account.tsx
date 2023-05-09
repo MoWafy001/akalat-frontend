@@ -30,9 +30,6 @@ export const Account = ({ logout }: { logout: Function }) => {
 
   useEffect(() => {
     getCurrentUser().then((data) => {
-      console.log("====================================");
-      console.log(config.api.host + data.record.image.path.replace(/\\/g, "/"));
-      console.log("====================================");
       setCurrentUser({
         ...data.record,
         image: config.api.host + data.record.image.path.replace(/\\/g, "/"),

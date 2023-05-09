@@ -22,6 +22,9 @@ export const config = {
       cart: {
         get: API_URL + "user/cart/get",
       },
+      wishlist: {
+        get: API_URL + "user/wishlist/get",
+      },
     },
   },
 };
