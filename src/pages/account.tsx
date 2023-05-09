@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { getCurrentUser, updateCurrentUser } from "../api/user";
 import { toast } from "react-toastify";
 
-export const Account = () => {
+export const Account = ({ logout }: { logout: Function }) => {
   const [currentUser, setCurrentUser] = useState({
     name: "toz",
     email: "toz@gmail.com",
@@ -22,10 +22,7 @@ export const Account = () => {
       })
       .catch((err) => {
         toast.error("Failed to update account");
-        if (err.response.status === 401) {
-          localStorage.removeItem("token");
-          window.location.href = "/login";
-        }
+        if (err.message === "Unauthorized") logout();
       });
   };
 

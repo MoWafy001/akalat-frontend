@@ -38,10 +38,7 @@ function App() {
       <ToastContainer />
       <Routes>
         {/* Login & Register */}
-        <Route
-          path="/login"
-          element={<Login login={login} />}
-        />
+        <Route path="/login" element={<Login login={login} />} />
         <Route path="/register" element={<Register />} />
 
         {!isLoggedIn && toast("You need to login first1") && (
@@ -54,19 +51,13 @@ function App() {
               path="resturants"
               element={<Restaurants logout={logout} />}
             />
-            <Route
-              path="delivery"
-              element={<Deliveries logout={logout} />}
-            />
-            <Route
-              path="meals"
-              element={<Meals logout={logout} />}
-            />
+            <Route path="delivery" element={<Deliveries logout={logout} />} />
+            <Route path="meals" element={<Meals logout={logout} />} />
             <Route path="wishlist" element={<WishList />} />
-            <Route path="cart" element={<Cart />} />
+            <Route path="cart" element={<Cart logout={logout} />} />
             <Route path="orders" element={<Orders />} />
             <Route path="reviews" element={<Reviews />} />
-            <Route path="account" element={<Account />} />
+            <Route path="account" element={<Account logout={logout} />} />
           </Route>
         )}
 

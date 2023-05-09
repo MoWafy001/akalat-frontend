@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
+import { getCart } from "../api/user";
 
-export const Cart = () => {
+export const Cart = ({ logout }: { logout: Function }) => {
   const testMeal = Card({
     price: "30 L.E",
     ogPrice: "40 L.E",
@@ -12,7 +14,19 @@ export const Cart = () => {
 
   const meals = [testMeal, testMeal, testMeal];
 
-  const orders = [
+  // const orders = [
+  //   {
+  //     restaurant: {
+  //       name: "Koshary El Tahrir",
+  //       img: "https://via.placeholder.com/350x150",
+  //     },
+  //     meals: meals,
+  //     total: "180 L.E",
+  //     ogTotal: "240 L.E",
+  //   },
+  // ];
+
+  const [orders, setOrders] = useState([
     {
       restaurant: {
         name: "Koshary El Tahrir",
@@ -22,7 +36,44 @@ export const Cart = () => {
       total: "180 L.E",
       ogTotal: "240 L.E",
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    getCart()
+      .then((data) => {
+        const record = data.record;
+        const { items, restaurant, total, originalTotal } = record;
+        setOrders([
+          {
+            restaurant: {
+              name: restaurant ? restaurant.name : "Koshary El Tahrir",
+              img: restaurant
+                ? restaurant.img
+                : "https://via.placeholder.com/350x150",
+            },
+            meals: items.map((item: any) => {
+              const meal = item.meal;
+              return Card({
+                price: meal.price,
+                ogPrice: meal.originalPrice,
+                name: meal.name,
+                rate: "⭐".repeat(meal.rate),
+                showTools: false,
+                showRemove: true,
+              });
+            }),
+            total: total,
+            ogTotal: originalTotal,
+          },
+        ]);
+      })
+      .catch((err) => {
+        // logout if unauthorized
+        if (err.message === "Unauthorized") logout();
+
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
@@ -36,12 +87,7 @@ export const Cart = () => {
         }}
       >
         My Cart
-        <img
-          src="/shopping-cart.png"
-          alt="Heart"
-          width={30}
-          height={30}
-        />
+        <img src="/shopping-cart.png" alt="Heart" width={30} height={30} />
       </h1>
 
       {orders.map((order, index) => (
@@ -58,7 +104,9 @@ export const Cart = () => {
             </div>
             <div className="order-total">
               <h3>Total: {order.total}</h3>
-              <h3>Origianl Totatl: <span className="sliced">{order.ogTotal}</span></h3>
+              <h3>
+                Origianl Totatl: <span className="sliced">{order.ogTotal}</span>
+              </h3>
             </div>
             <div className="order-options">
               <button>Flush</button>

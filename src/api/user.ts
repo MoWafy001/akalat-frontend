@@ -1,5 +1,18 @@
 import { config } from "../config";
 
+const handleErrors = (res: Response) => {
+  if (!(res.status >= 200 && res.status < 300)) {
+    // if unauthorized, remove token and user from localStorage
+    if (res.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      throw new Error("Unauthorized");
+    }
+
+    throw new Error(res.statusText);
+  }
+};
+
 export const listMeals = (): Promise<any> => {
   return fetch(config.api.user.meal.list, {
     method: "GET",
@@ -7,9 +20,7 @@ export const listMeals = (): Promise<any> => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then(async (res: Response) => {
-    if (!(res.status >= 200 && res.status < 300))
-      throw new Error(await res.json());
-
+    handleErrors(res);
     return res.json();
   });
 };
@@ -21,9 +32,7 @@ export const listRestaurants = (): Promise<any> => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then(async (res: Response) => {
-    if (!(res.status >= 200 && res.status < 300))
-      throw new Error(await res.json());
-
+    handleErrors(res);
     return res.json();
   });
 };
@@ -35,9 +44,7 @@ export const listDeliveries = (): Promise<any> => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then(async (res: Response) => {
-    if (!(res.status >= 200 && res.status < 300))
-      throw new Error(await res.json());
-
+    handleErrors(res);
     return res.json();
   });
 };
@@ -56,9 +63,7 @@ export const getCurrentUser = (): Promise<any> => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then(async (res: Response) => {
-    if (!(res.status >= 200 && res.status < 300))
-      throw new Error(await res.json());
-
+    handleErrors(res);
     return res.json();
   });
 };
@@ -79,9 +84,26 @@ export const updateCurrentUser = (data: any): Promise<any> => {
     },
     body: JSON.stringify(data),
   }).then(async (res: Response) => {
-    if (!(res.status >= 200 && res.status < 300))
-      throw new Error(await res.json());
+    handleErrors(res);
+    return res.json();
+  });
+};
 
+export const getCart = (): Promise<any> => {
+  const userJSON = localStorage.getItem("user");
+  if (!userJSON) {
+    return Promise.resolve(null);
+  }
+  const user = JSON.parse(userJSON);
+  const userId = user._id;
+
+  return fetch(`${config.api.user.cart.get}?user=${userId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }).then(async (res: Response) => {
+    handleErrors(res);
     return res.json();
   });
 };

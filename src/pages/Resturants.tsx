@@ -20,11 +20,7 @@ export const Restaurants = ({ logout }: { logout: Function }) => {
       })
       .catch((err) => {
         // logout if unauthorized
-        if (err.response.status === 401) {
-          localStorage.removeItem("token");
-          logout();
-          window.location.href = "/login";
-        }
+        if (err.message === "Unauthorized") logout();
       });
   }, [logout]);
 

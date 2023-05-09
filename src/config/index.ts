@@ -17,6 +17,9 @@ export const config = {
       },
       get: API_URL + "user/get",
       update: API_URL + "user/update",
+      cart: {
+        get: API_URL + "user/cart/get",
+      },
     },
   },
 };
