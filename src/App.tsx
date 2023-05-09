@@ -23,6 +23,16 @@ function App() {
     localStorage.getItem("token") ? true : false
   );
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    window.location.href = "/login";
+  };
+
+  const login = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
     <>
       <ToastContainer />
@@ -30,7 +40,7 @@ function App() {
         {/* Login & Register */}
         <Route
           path="/login"
-          element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          element={<Login login={login} />}
         />
         <Route path="/register" element={<Register />} />
 
@@ -38,11 +48,20 @@ function App() {
           <Route path="*" element={<Navigate to="/login" />} />
         )}
         {isLoggedIn && (
-          <Route path="/" element={<Layout setIsLoggedIn={setIsLoggedIn} />}>
-            <Route index element={<Home />} />
-            <Route path="resturants" element={<Restaurants />} />
-            <Route path="delivery" element={<Deliveries />} />
-            <Route path="meals" element={<Meals />} />
+          <Route path="/" element={<Layout logout={logout} />}>
+            <Route index element={<Home logout={logout} />} />
+            <Route
+              path="resturants"
+              element={<Restaurants logout={logout} />}
+            />
+            <Route
+              path="delivery"
+              element={<Deliveries logout={logout} />}
+            />
+            <Route
+              path="meals"
+              element={<Meals logout={logout} />}
+            />
             <Route path="wishlist" element={<WishList />} />
             <Route path="cart" element={<Cart />} />
             <Route path="orders" element={<Orders />} />

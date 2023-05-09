@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { config } from "../config";
 
-export const Login = ({ setIsLoggedIn }: { setIsLoggedIn: Function }) => {
+export const Login = ({ login }: { login: Function }) => {
   const navigate = useNavigate();
 
   const handleLogin = async (e: any) => {
@@ -24,7 +24,7 @@ export const Login = ({ setIsLoggedIn }: { setIsLoggedIn: Function }) => {
           toast.success("Login successful");
           localStorage.setItem("token", res.token);
           localStorage.setItem("user", JSON.stringify(res.record));
-          setIsLoggedIn(true);
+          login();
           return navigate("/");
         } else {
           toast.error(res.error);

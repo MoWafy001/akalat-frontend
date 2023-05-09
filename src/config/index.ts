@@ -15,6 +15,8 @@ export const config = {
       delivery: {
         list: API_URL + "user/delivery/list",
       },
+      get: API_URL + "user/get",
+      update: API_URL + "user/update",
     },
   },
 };

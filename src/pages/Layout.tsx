@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-export const Layout = ({ setIsLoggedIn }: { setIsLoggedIn: Function }) => {
+export const Layout = ({ logout }: { logout: Function }) => {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -13,7 +13,7 @@ export const Layout = ({ setIsLoggedIn }: { setIsLoggedIn: Function }) => {
     e.preventDefault();
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    setIsLoggedIn(false);
+    logout();
     navigate("/login");
   };
 

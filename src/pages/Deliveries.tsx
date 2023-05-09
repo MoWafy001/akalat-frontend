@@ -2,22 +2,31 @@ import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import { listDeliveries } from "../api/user";
 
-export const Deliveries = () => {
+export const Deliveries = ({ logout }: { logout: Function }) => {
   const [deliveries, setDeliveries] = useState([]);
 
   useEffect(() => {
-    listDeliveries().then((data) => {
-      setDeliveries(
-        data.record.map((delivery: any) => {
-          return Card({
-            name: delivery.name,
-            rate: "⭐".repeat(delivery.rate),
-            showTools: false,
-          });
-        })
-      );
-    });
-  }, []);
+    listDeliveries()
+      .then((data) => {
+        setDeliveries(
+          data.record.map((delivery: any) => {
+            return Card({
+              name: delivery.name,
+              rate: "⭐".repeat(delivery.rate),
+              showTools: false,
+            });
+          })
+        );
+      })
+      .catch((err) => {
+        // logout if unauthorized
+        if (err.response.status === 401) {
+          localStorage.removeItem("token");
+          logout();
+          window.location.href = "/login";
+        }
+      });
+  }, [logout]);
 
   return (
     <>

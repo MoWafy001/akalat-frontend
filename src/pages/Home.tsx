@@ -9,48 +9,75 @@ import Slider from "react-slick";
 import { useEffect, useState } from "react";
 import { listDeliveries, listMeals, listRestaurants } from "../api/user";
 
-export const Home = () => {
+export const Home = ({ logout }: { logout: Function }) => {
   const [meals, setMeals] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
   const [deliveries, setDeliveries] = useState([]);
 
   useEffect(() => {
-    listMeals().then((data) => {
-      setMeals(
-        data.record.map((meal: any) => {
-          return Card({
-            name: meal.name,
-            rate: "⭐".repeat(meal.rate),
-            showTools: true,
-          });
-        })
-      );
-    });
+    listMeals()
+      .then((data) => {
+        setMeals(
+          data.record.map((meal: any) => {
+            return Card({
+              name: meal.name,
+              rate: "⭐".repeat(meal.rate),
+              showTools: true,
+            });
+          })
+        );
+      })
+      .catch((err) => {
+        // logout if unauthorized
+        if (err.response.status === 401) {
+          localStorage.removeItem("token");
+          logout();
+          window.location.href = "/login";
+        }
+      });
 
-    listRestaurants().then((data) => {
-      setRestaurants(
-        data.record.map((restaurant: any) => {
-          return Card({
-            name: restaurant.name,
-            rate: "⭐".repeat(restaurant.rate),
-            showTools: false,
-          });
-        })
-      );
-    });
+    listRestaurants()
+      .then((data) => {
+        setRestaurants(
+          data.record.map((restaurant: any) => {
+            return Card({
+              name: restaurant.name,
+              rate: "⭐".repeat(restaurant.rate),
+              showTools: false,
+            });
+          })
+        );
+      })
+      .catch((err) => {
+        // logout if unauthorized
+        if (err.response.status === 401) {
+          localStorage.removeItem("token");
+          logout();
+          window.location.href = "/login";
+        }
+      });
 
-    listDeliveries().then((data) => {
-      setDeliveries(
-        data.record.map((delivery: any) => {
-          return Card({
-            name: delivery.name,
-            rate: "⭐".repeat(delivery.rate),
-            showTools: false,
-          });
-        })
-      );
-    });
-  }, []);
+    listDeliveries()
+      .then((data) => {
+        setDeliveries(
+          data.record.map((delivery: any) => {
+            return Card({
+              name: delivery.name,
+              rate: "⭐".repeat(delivery.rate),
+              showTools: false,
+            });
+          })
+        );
+      })
+      .catch((err) => {
+        // logout if unauthorized
+        if (err.response.status === 401) {
+          localStorage.removeItem("token");
+          logout();
+          window.location.href = "/login";
+        }
+      });
+  }, [logout]);
 
   return (
     <>

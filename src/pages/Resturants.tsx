@@ -2,22 +2,31 @@ import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import { listRestaurants } from "../api/user";
 
-export const Restaurants = () => {
+export const Restaurants = ({ logout }: { logout: Function }) => {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    listRestaurants().then((data) => {
-      setRestaurants(
-        data.record.map((restaurant: any) => {
-          return Card({
-            name: restaurant.name,
-            rate: "⭐".repeat(restaurant.rate),
-            showTools: false,
-          });
-        })
-      );
-    });
-  }, []);
+    listRestaurants()
+      .then((data) => {
+        setRestaurants(
+          data.record.map((restaurant: any) => {
+            return Card({
+              name: restaurant.name,
+              rate: "⭐".repeat(restaurant.rate),
+              showTools: false,
+            });
+          })
+        );
+      })
+      .catch((err) => {
+        // logout if unauthorized
+        if (err.response.status === 401) {
+          localStorage.removeItem("token");
+          logout();
+          window.location.href = "/login";
+        }
+      });
+  }, [logout]);
 
   return (
     <>
