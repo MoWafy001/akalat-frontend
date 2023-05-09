@@ -1,7 +1,9 @@
-const API_URL = "http://localhost:4000/api/v1/";
+const API_HOST = "http://localhost:4000/";
+const API_URL = API_HOST + "api/v1/";
 
 export const config = {
   api: {
+    host: API_HOST,
     url: API_URL,
     user: {
       register: API_URL + "user/register",

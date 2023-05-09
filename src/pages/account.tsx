@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { getCurrentUser, updateCurrentUser } from "../api/user";
 import { toast } from "react-toastify";
+import { config } from "../config";
 
 export const Account = ({ logout }: { logout: Function }) => {
   const [currentUser, setCurrentUser] = useState({
@@ -8,6 +9,7 @@ export const Account = ({ logout }: { logout: Function }) => {
     email: "toz@gmail.com",
     address: "toz street",
     phone: "0123456789",
+    image: "https://via.placeholder.com/350x150",
   });
 
   const [editMode, setEditMode] = useState(false);
@@ -28,7 +30,13 @@ export const Account = ({ logout }: { logout: Function }) => {
 
   useEffect(() => {
     getCurrentUser().then((data) => {
-      setCurrentUser(data.record);
+      console.log("====================================");
+      console.log(config.api.host + data.record.image.path.replace(/\\/g, "/"));
+      console.log("====================================");
+      setCurrentUser({
+        ...data.record,
+        image: config.api.host + data.record.image.path.replace(/\\/g, "/"),
+      });
     });
   }, []);
 
@@ -47,7 +55,7 @@ export const Account = ({ logout }: { logout: Function }) => {
         </div>
 
         <div className="prof-image">
-          <img src={"https://picsum.photos/200"} alt="profile" />
+          <img src={currentUser.image} alt="profile" />
         </div>
 
         <div className="account-info">

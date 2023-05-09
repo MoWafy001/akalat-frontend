@@ -8,6 +8,7 @@ import Slider from "react-slick";
 
 import { useEffect, useState } from "react";
 import { listDeliveries, listMeals, listRestaurants } from "../api/user";
+import { config } from "../config";
 
 export const Home = ({ logout }: { logout: Function }) => {
   const [meals, setMeals] = useState([]);
@@ -23,6 +24,9 @@ export const Home = ({ logout }: { logout: Function }) => {
               name: meal.name,
               rate: "⭐".repeat(meal.rate),
               showTools: true,
+              image: meal.image
+                ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
+                : undefined,
             });
           })
         );
@@ -40,6 +44,9 @@ export const Home = ({ logout }: { logout: Function }) => {
               name: restaurant.name,
               rate: "⭐".repeat(restaurant.rate),
               showTools: false,
+              image: restaurant.image
+                ? config.api.host + restaurant.image.path.replace(/\\/g, "/")
+                : undefined,
             });
           })
         );
@@ -57,6 +64,9 @@ export const Home = ({ logout }: { logout: Function }) => {
               name: delivery.name,
               rate: "⭐".repeat(delivery.rate),
               showTools: false,
+              image: delivery.image
+                ? config.api.host + delivery.image.path.replace(/\\/g, "/")
+                : undefined,
             });
           })
         );
@@ -65,7 +75,7 @@ export const Home = ({ logout }: { logout: Function }) => {
         // logout if unauthorized
         if (err.message === "Unauthorized") logout();
       });
-  }, [logout]);
+  }, [logout, setMeals, setRestaurants, setDeliveries]);
 
   return (
     <>

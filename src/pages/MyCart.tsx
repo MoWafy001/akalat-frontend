@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import { getCart } from "../api/user";
+import { config } from "../config";
 
 export const Cart = ({ logout }: { logout: Function }) => {
   const testMeal = Card({
@@ -26,17 +27,17 @@ export const Cart = ({ logout }: { logout: Function }) => {
   //   },
   // ];
 
-  const [orders, setOrders] = useState([
-    {
+  const [orders, setOrders] = useState(
+    [] as {
       restaurant: {
-        name: "Koshary El Tahrir",
-        img: "https://via.placeholder.com/350x150",
-      },
-      meals: meals,
-      total: "180 L.E",
-      ogTotal: "240 L.E",
-    },
-  ]);
+        name: string;
+        img: string;
+      };
+      meals: any[];
+      total: string;
+      ogTotal: string;
+    }[]
+  );
 
   useEffect(() => {
     getCart()
@@ -46,10 +47,10 @@ export const Cart = ({ logout }: { logout: Function }) => {
         setOrders([
           {
             restaurant: {
-              name: restaurant ? restaurant.name : "Koshary El Tahrir",
+              name: restaurant ? restaurant.name : "",
               img: restaurant
-                ? restaurant.img
-                : "https://via.placeholder.com/350x150",
+                ? config.api.host + restaurant.image.path.replace(/\\/g, "/")
+                : "",
             },
             meals: items.map((item: any) => {
               const meal = item.meal;
@@ -60,6 +61,9 @@ export const Cart = ({ logout }: { logout: Function }) => {
                 rate: "⭐".repeat(meal.rate),
                 showTools: false,
                 showRemove: true,
+                image: meal.image
+                  ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
+                  : undefined,
               });
             }),
             total: total,
@@ -91,9 +95,9 @@ export const Cart = ({ logout }: { logout: Function }) => {
       </h1>
 
       {orders.map((order, index) => (
-        <div className="card-order">
+        <div className="card-order" key={index}>
           <h2>
-            <img src={order.restaurant.img} alt="rest logo" />
+            <img src={order.restaurant.img} alt="" />
             {order.restaurant.name}{" "}
           </h2>
           <div className="order-details">

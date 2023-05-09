@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import { listMeals } from "../api/user";
+import { config } from "../config";
 
 export const Meals = ({ logout }: { logout: Function }) => {
   const [meals, setMeals] = useState([]);
@@ -14,6 +15,9 @@ export const Meals = ({ logout }: { logout: Function }) => {
               name: meal.name,
               rate: "⭐".repeat(meal.rate),
               showTools: true,
+              image: meal.image
+                ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
+                : undefined,
             });
           })
         );

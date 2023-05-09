@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import { listDeliveries } from "../api/user";
+import { config } from "../config";
 
 export const Deliveries = ({ logout }: { logout: Function }) => {
   const [deliveries, setDeliveries] = useState([]);
@@ -14,6 +15,9 @@ export const Deliveries = ({ logout }: { logout: Function }) => {
               name: delivery.name,
               rate: "⭐".repeat(delivery.rate),
               showTools: false,
+              image: delivery.image
+                ? config.api.host + delivery.image.path.replace(/\\/g, "/")
+                : undefined,
             });
           })
         );

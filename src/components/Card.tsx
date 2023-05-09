@@ -6,6 +6,7 @@ export const Card = ({
   showTools,
   showRemove = false,
   review,
+  image,
 }: {
   price?: string;
   ogPrice?: string;
@@ -14,10 +15,11 @@ export const Card = ({
   showTools: boolean;
   showRemove?: boolean;
   review?: string;
+  image?: string;
 }) => {
   return (
     <div className="card">
-      <img src="https://via.placeholder.com/350" alt="meal" />
+      <img src={image || "https://via.placeholder.com/350"} alt="meal" />
       <div className="card-info">
         <div className="card-price">
           <span>{price}</span>

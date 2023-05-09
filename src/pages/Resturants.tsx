@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import { listRestaurants } from "../api/user";
+import { config } from "../config";
 
 export const Restaurants = ({ logout }: { logout: Function }) => {
   const [restaurants, setRestaurants] = useState([]);
@@ -14,6 +15,9 @@ export const Restaurants = ({ logout }: { logout: Function }) => {
               name: restaurant.name,
               rate: "⭐".repeat(restaurant.rate),
               showTools: false,
+              image: restaurant.image
+                ? config.api.host + restaurant.image.path.replace(/\\/g, "/")
+                : undefined,
             });
           })
         );
