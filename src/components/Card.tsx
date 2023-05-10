@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export const Card = ({
   price,
   ogPrice,
@@ -17,6 +19,16 @@ export const Card = ({
   review?: string;
   image?: string;
 }) => {
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) setQuantity(quantity - 1);
+  };
+
   return (
     <div className="card">
       <img src={image || "https://via.placeholder.com/350"} alt="meal" />
@@ -42,9 +54,9 @@ export const Card = ({
               <img src="/heart-outline-shape.png" alt="like" />
             </button>
             <div className="quantity">
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
+              <button onClick={decreaseQuantity}>-</button>
+              <span>{quantity}</span>
+              <button onClick={increaseQuantity}>+</button>
             </div>
             <button className="cart-add">
               <img src="/shopping-cart.png" alt="cart" />

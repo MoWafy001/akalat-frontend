@@ -11,14 +11,14 @@ export const Meals = ({ logout }: { logout: Function }) => {
       .then((data) => {
         setMeals(
           data.record.map((meal: any) => {
-            return Card({
+            return {
               name: meal.name,
               rate: "⭐".repeat(meal.rate),
               showTools: true,
               image: meal.image
                 ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                 : undefined,
-            });
+            };
           })
         );
       })
@@ -40,8 +40,10 @@ export const Meals = ({ logout }: { logout: Function }) => {
       </div>
 
       <div className="page-elements">
-        {meals.map((meal, index) => (
-          <div key={index}>{meal}</div>
+        {meals.map((meal: any, index) => (
+          <div key={index}>
+            <Card {...meal} />
+          </div>
         ))}
       </div>
     </>

@@ -28,7 +28,7 @@ export const WishList = () => {
       setMeals(
         items.map((item: any) => {
           const meal = item.meal;
-          return Card({
+          return {
             price: meal.price,
             ogPrice: meal.originalPrice,
             name: meal.name,
@@ -36,7 +36,7 @@ export const WishList = () => {
             showTools: false,
             showRemove: true,
             image: config.api.host + meal.image[0].path.replace(/\\/g, "/"),
-          });
+          };
         })
       );
     });
@@ -63,8 +63,10 @@ export const WishList = () => {
       </h1>
 
       <div className="page-elements">
-        {meals.map((meal, index) => (
-          <div key={index}>{meal}</div>
+        {meals.map((meal: any, index) => (
+          <div key={index}>
+            <Card {...meal} />
+          </div>
         ))}
       </div>
     </>

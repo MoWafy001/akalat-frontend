@@ -11,14 +11,14 @@ export const Deliveries = ({ logout }: { logout: Function }) => {
       .then((data) => {
         setDeliveries(
           data.record.map((delivery: any) => {
-            return Card({
+            return {
               name: delivery.name,
               rate: "⭐".repeat(delivery.rate),
               showTools: false,
               image: delivery.image
                 ? config.api.host + delivery.image.path.replace(/\\/g, "/")
                 : undefined,
-            });
+            };
           })
         );
       })
@@ -40,8 +40,10 @@ export const Deliveries = ({ logout }: { logout: Function }) => {
       </div>
 
       <div className="page-elements">
-        {deliveries.map((delivery, index) => (
-          <div key={index}>{delivery}</div>
+        {deliveries.map((delivery: any, index) => (
+          <div key={index}>
+            <Card {...delivery} />
+          </div>
         ))}
       </div>
     </>

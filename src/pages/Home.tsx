@@ -20,14 +20,14 @@ export const Home = ({ logout }: { logout: Function }) => {
       .then((data) => {
         setMeals(
           data.record.map((meal: any) => {
-            return Card({
+            return {
               name: meal.name,
               rate: "⭐".repeat(meal.rate),
               showTools: true,
               image: meal.image
                 ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                 : undefined,
-            });
+            };
           })
         );
       })
@@ -40,14 +40,14 @@ export const Home = ({ logout }: { logout: Function }) => {
       .then((data) => {
         setRestaurants(
           data.record.map((restaurant: any) => {
-            return Card({
+            return {
               name: restaurant.name,
               rate: "⭐".repeat(restaurant.rate),
               showTools: false,
               image: restaurant.image
                 ? config.api.host + restaurant.image.path.replace(/\\/g, "/")
                 : undefined,
-            });
+            };
           })
         );
       })
@@ -60,14 +60,14 @@ export const Home = ({ logout }: { logout: Function }) => {
       .then((data) => {
         setDeliveries(
           data.record.map((delivery: any) => {
-            return Card({
+            return {
               name: delivery.name,
               rate: "⭐".repeat(delivery.rate),
               showTools: false,
               image: delivery.image
                 ? config.api.host + delivery.image.path.replace(/\\/g, "/")
                 : undefined,
-            });
+            };
           })
         );
       })
@@ -85,8 +85,10 @@ export const Home = ({ logout }: { logout: Function }) => {
         <div className="section">
           <h2>Meals</h2>
           <Slider slidesToScroll={4} slidesToShow={4} autoplay={true}>
-            {meals.map((meal, index) => (
-              <div key={index}>{meal}</div>
+            {meals.map((meal: any, index) => (
+              <div key={index}>
+                <Card {...meal} />
+              </div>
             ))}
           </Slider>
         </div>
@@ -94,8 +96,10 @@ export const Home = ({ logout }: { logout: Function }) => {
         <div className="section">
           <h2>Restaurants</h2>
           <Slider slidesToScroll={4} slidesToShow={4} autoplay={false}>
-            {restaurants.map((rest, index) => (
-              <div key={index}>{rest}</div>
+            {restaurants.map((rest: any, index) => (
+              <div key={index}>
+                <Card {...rest} />
+              </div>
             ))}
           </Slider>
         </div>
@@ -103,8 +107,10 @@ export const Home = ({ logout }: { logout: Function }) => {
         <div className="section">
           <h2>Delivery</h2>
           <Slider slidesToScroll={4} slidesToShow={4} autoplay={false}>
-            {deliveries.map((delivery, index) => (
-              <div key={index}>{delivery}</div>
+            {deliveries.map((delivery: any, index) => (
+              <div key={index}>
+                <Card {...delivery} />
+              </div>
             ))}
           </Slider>
         </div>

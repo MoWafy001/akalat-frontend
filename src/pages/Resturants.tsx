@@ -11,14 +11,14 @@ export const Restaurants = ({ logout }: { logout: Function }) => {
       .then((data) => {
         setRestaurants(
           data.record.map((restaurant: any) => {
-            return Card({
+            return {
               name: restaurant.name,
               rate: "⭐".repeat(restaurant.rate),
               showTools: false,
               image: restaurant.image
                 ? config.api.host + restaurant.image.path.replace(/\\/g, "/")
                 : undefined,
-            });
+            };
           })
         );
       })
@@ -40,8 +40,10 @@ export const Restaurants = ({ logout }: { logout: Function }) => {
       </div>
 
       <div className="page-elements">
-        {restaurants.map((restaurant, index) => (
-          <div key={index}>{restaurant}</div>
+        {restaurants.map((restaurant: any, index) => (
+          <div key={index}>
+            <Card {...restaurant} />
+          </div>
         ))}
       </div>
     </>

@@ -54,7 +54,7 @@ export const Cart = ({ logout }: { logout: Function }) => {
             },
             meals: items.map((item: any) => {
               const meal = item.meal;
-              return Card({
+              return {
                 price: meal.price,
                 ogPrice: meal.originalPrice,
                 name: meal.name,
@@ -64,7 +64,7 @@ export const Cart = ({ logout }: { logout: Function }) => {
                 image: meal.image
                   ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                   : undefined,
-              });
+              };
             }),
             total: total,
             ogTotal: originalTotal,
@@ -102,8 +102,10 @@ export const Cart = ({ logout }: { logout: Function }) => {
           </h2>
           <div className="order-details">
             <div className="order-meals">
-              {order.meals.map((meal, index) => (
-                <div key={index}>{meal}</div>
+              {order.meals.map((meal: any, index) => (
+                <div key={index}>
+                  <Card {...meal} />
+                </div>
               ))}
             </div>
             <div className="order-total">
