@@ -311,3 +311,25 @@ export const removeFromWishlist = (mealId: string): Promise<any> => {
     return res.json();
   });
 };
+
+// Orders
+
+export const getOrders = (): Promise<any> => {
+  const userJSON = localStorage.getItem("user");
+  if (!userJSON) {
+    return Promise.resolve([]);
+  }
+  const user = JSON.parse(userJSON);
+  const userId = user._id;
+
+  return fetch(`${config.api.user.orders.list}?user=${userId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }).then(async (res: Response) => {
+    const error = handleErrors(res);
+    if (error) throw await error;
+    return res.json();
+  });
+};

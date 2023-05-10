@@ -34,6 +34,10 @@ export const config = {
         add: API_URL + "user/wishlist/item",
         delete: API_URL + "user/wishlist/item",
       },
+      orders: {
+        list: API_URL + "user/order/list",
+        accept: API_URL + "user/order/accepteOrder",
+      },
     },
   },
 };

@@ -72,9 +72,34 @@
                 padding: 0.5rem 2.5rem;
                 border-radius: 15px;
                 box-shadow: 1px 1px 3px #000;
+
+                &.to-accept{
+                    background: #f19705e5;
+                    cursor: pointer;
+
+                    &:hover{
+                        background: #dc8800;
+                    }
+                }
+
+                &.accepted{
+                    background: #00a300;
+                    cursor: pointer;
+
+                    &:hover{
+                        background: #008c00;
+                    }
+                }
             }
         }
 
 
     }
+}
+
+.order-items-cards{
+  img{
+    width: 100% !important;
+    max-height: 200px;
+  }
 }
