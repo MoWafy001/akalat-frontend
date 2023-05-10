@@ -10,6 +10,7 @@ export const Card = ({
   rate,
   showTools,
   showRemove = false,
+  removeFunction,
   review,
   image,
   mealId,
@@ -21,6 +22,7 @@ export const Card = ({
   rate: string;
   showTools: boolean;
   showRemove?: boolean;
+  removeFunction?: any;
   review?: string;
   image?: string;
   mealId?: string;
@@ -113,7 +115,7 @@ export const Card = ({
         {showRemove && (
           <div className="card-options">
             <div className="quantity" style={{ border: "none" }}>
-              <button>-</button>
+              <button onClick={removeFunction}>-</button>
             </div>
           </div>
         )}
