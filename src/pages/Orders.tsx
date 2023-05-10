@@ -9,6 +9,7 @@ export const Orders = () => {
     rate: "⭐ ⭐ ⭐ ⭐",
     showTools: false,
     showRemove: true,
+    cardPagePath: "/meals/123",
   });
 
   const meals = [testMeal, testMeal, testMeal];

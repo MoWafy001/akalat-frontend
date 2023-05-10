@@ -26,6 +26,19 @@ export const listMeals = (): Promise<any> => {
   });
 };
 
+export const getMeal = (mealId: string): Promise<any> => {
+  return fetch(`${config.api.user.meal.get}?_id=${mealId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }).then(async (res: Response) => {
+    const error = handleErrors(res);
+    if (error) throw await error;
+    return res.json();
+  });
+};
+
 export const listRestaurants = (): Promise<any> => {
   return fetch(config.api.user.restaurant.list, {
     method: "GET",
@@ -39,8 +52,34 @@ export const listRestaurants = (): Promise<any> => {
   });
 };
 
+export const getRestaurant = (restaurantId: string): Promise<any> => {
+  return fetch(`${config.api.user.restaurant.get}?_id=${restaurantId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }).then(async (res: Response) => {
+    const error = handleErrors(res);
+    if (error) throw await error;
+    return res.json();
+  });
+};
+
 export const listDeliveries = (): Promise<any> => {
   return fetch(config.api.user.delivery.list, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }).then(async (res: Response) => {
+    const error = handleErrors(res);
+    if (error) throw await error;
+    return res.json();
+  });
+};
+
+export const getDelivery = (deliveryId: string): Promise<any> => {
+  return fetch(`${config.api.user.delivery.get}?_id=${deliveryId}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,

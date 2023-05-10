@@ -27,7 +27,8 @@ export const Home = ({ logout }: { logout: Function }) => {
               image: meal.image
                 ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                 : undefined,
-              mealId: meal._id, 
+              mealId: meal._id,
+              cardPagePath: `/meals/${meal._id}`,
             };
           })
         );
@@ -48,6 +49,7 @@ export const Home = ({ logout }: { logout: Function }) => {
               image: restaurant.image
                 ? config.api.host + restaurant.image.path.replace(/\\/g, "/")
                 : undefined,
+              cardPagePath: `/restaurants/${restaurant._id}`,
             };
           })
         );
@@ -68,6 +70,7 @@ export const Home = ({ logout }: { logout: Function }) => {
               image: delivery.image
                 ? config.api.host + delivery.image.path.replace(/\\/g, "/")
                 : undefined,
+              cardPagePath: `/deliveries/${delivery._id}`,
             };
           })
         );

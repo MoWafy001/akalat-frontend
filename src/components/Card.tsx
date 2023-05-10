@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addToCart, addToWishlist } from "../api/user";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export const Card = ({
   price,
@@ -12,6 +13,7 @@ export const Card = ({
   review,
   image,
   mealId,
+  cardPagePath,
 }: {
   price?: string;
   ogPrice?: string;
@@ -22,6 +24,7 @@ export const Card = ({
   review?: string;
   image?: string;
   mealId?: string;
+  cardPagePath: string;
 }) => {
   const [quantity, setQuantity] = useState(1);
 
@@ -71,7 +74,16 @@ export const Card = ({
           <span>{price}</span>
           <span className="og-price">{ogPrice}</span>
         </div>
-        <span className="card-name">{name}</span>
+        <Link
+          to={cardPagePath}
+          className="card-name"
+          style={{
+            textDecoration: "none",
+            color: "inherit",
+          }}
+        >
+          {name}
+        </Link>
 
         {review && (
           <div className="card-review">

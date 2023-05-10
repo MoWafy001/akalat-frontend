@@ -11,6 +11,7 @@ export const WishList = () => {
     rate: "⭐ ⭐ ⭐ ⭐",
     showTools: false,
     showRemove: true,
+    cardPagePath: "/meals/123",
   });
 
   // const meals = [

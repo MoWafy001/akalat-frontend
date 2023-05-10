@@ -18,6 +18,7 @@ export const Restaurants = ({ logout }: { logout: Function }) => {
               image: restaurant.image
                 ? config.api.host + restaurant.image.path.replace(/\\/g, "/")
                 : undefined,
+              cardPagePath: `/restaurants/${restaurant._id}`,
             };
           })
         );

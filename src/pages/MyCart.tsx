@@ -11,6 +11,7 @@ export const Cart = ({ logout }: { logout: Function }) => {
     rate: "⭐ ⭐ ⭐ ⭐",
     showTools: false,
     showRemove: true,
+    cardPagePath: "/meals/123",
   });
 
   const meals = [testMeal, testMeal, testMeal];
@@ -64,6 +65,7 @@ export const Cart = ({ logout }: { logout: Function }) => {
                 image: meal.image
                   ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                   : undefined,
+                cardPagePath: `/meals/${meal._id}`,
               };
             }),
             total: total,

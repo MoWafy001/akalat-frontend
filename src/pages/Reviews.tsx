@@ -6,6 +6,7 @@ export const Reviews = () => {
     rate: "⭐ ⭐ ⭐ ⭐",
     showTools: false,
     review: "Good restaurant",
+    cardPagePath: "/meals/123",
   });
 
   const restaurants = [

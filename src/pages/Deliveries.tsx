@@ -18,6 +18,7 @@ export const Deliveries = ({ logout }: { logout: Function }) => {
               image: delivery.image
                 ? config.api.host + delivery.image.path.replace(/\\/g, "/")
                 : undefined,
+              cardPagePath: `/deliveries/${delivery._id}`,
             };
           })
         );

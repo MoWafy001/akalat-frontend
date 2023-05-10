@@ -10,12 +10,15 @@ export const config = {
       login: API_URL + "user/login",
       meal: {
         list: API_URL + "user/meal/list",
+        get: API_URL + "user/meal/get",
       },
       restaurant: {
         list: API_URL + "user/restaurant/list",
+        get: API_URL + "user/restaurant/get",
       },
       delivery: {
         list: API_URL + "user/delivery/list",
+        get: API_URL + "user/delivery/get",
       },
       get: API_URL + "user/get",
       update: API_URL + "user/update",
