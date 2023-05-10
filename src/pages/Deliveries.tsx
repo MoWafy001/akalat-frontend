@@ -6,6 +6,8 @@ import { config } from "../config";
 export const Deliveries = ({ logout }: { logout: Function }) => {
   const [deliveries, setDeliveries] = useState([]);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
     listDeliveries()
       .then((data) => {
@@ -37,15 +39,28 @@ export const Deliveries = ({ logout }: { logout: Function }) => {
         <button>
           <img src="/zoomer.png" alt="" />
         </button>
-        <input type="text" />
+        <input
+          type="text"
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+        />
       </div>
 
       <div className="page-elements">
-        {deliveries.map((delivery: any, index) => (
-          <div key={index}>
-            <Card {...delivery} />
-          </div>
-        ))}
+        {deliveries.map((delivery: any, index) => {
+          if (
+            searchTerm &&
+            !delivery.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+            return null;
+
+          return (
+            <div key={index}>
+              <Card {...delivery} />
+            </div>
+          );
+        })}
       </div>
     </>
   );

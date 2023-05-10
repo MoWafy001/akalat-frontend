@@ -6,6 +6,8 @@ import { config } from "../config";
 export const Restaurants = ({ logout }: { logout: Function }) => {
   const [restaurants, setRestaurants] = useState([]);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
     listRestaurants()
       .then((data) => {
@@ -37,15 +39,28 @@ export const Restaurants = ({ logout }: { logout: Function }) => {
         <button>
           <img src="/zoomer.png" alt="" />
         </button>
-        <input type="text" />
+        <input
+          type="text"
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+        />
       </div>
 
       <div className="page-elements">
-        {restaurants.map((restaurant: any, index) => (
-          <div key={index}>
-            <Card {...restaurant} />
-          </div>
-        ))}
+        {restaurants.map((restaurant: any, index) => {
+          if (
+            searchTerm &&
+            !restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+            return null;
+
+          return (
+            <div key={index}>
+              <Card {...restaurant} />
+            </div>
+          );
+        })}
       </div>
     </>
   );
