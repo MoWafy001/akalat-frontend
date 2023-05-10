@@ -25,6 +25,7 @@ export const config = {
       },
       wishlist: {
         get: API_URL + "user/wishlist/get",
+        add: API_URL + "user/wishlist/item",
       },
     },
   },

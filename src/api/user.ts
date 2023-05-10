@@ -21,7 +21,7 @@ export const listMeals = (): Promise<any> => {
     },
   }).then(async (res: Response) => {
     const error = handleErrors(res);
-    if(error) throw await error
+    if (error) throw await error;
     return res.json();
   });
 };
@@ -34,7 +34,7 @@ export const listRestaurants = (): Promise<any> => {
     },
   }).then(async (res: Response) => {
     const error = handleErrors(res);
-    if(error) throw await error
+    if (error) throw await error;
     return res.json();
   });
 };
@@ -47,7 +47,7 @@ export const listDeliveries = (): Promise<any> => {
     },
   }).then(async (res: Response) => {
     const error = handleErrors(res);
-    if(error) throw await error
+    if (error) throw await error;
     return res.json();
   });
 };
@@ -67,7 +67,7 @@ export const getCurrentUser = (): Promise<any> => {
     },
   }).then(async (res: Response) => {
     const error = handleErrors(res);
-    if(error) throw await error
+    if (error) throw await error;
     return res.json();
   });
 };
@@ -89,7 +89,7 @@ export const updateCurrentUser = (data: any): Promise<any> => {
     body: JSON.stringify(data),
   }).then(async (res: Response) => {
     const error = handleErrors(res);
-    if(error) throw await error
+    if (error) throw await error;
     return res.json();
   });
 };
@@ -109,7 +109,7 @@ export const getCart = (): Promise<any> => {
     },
   }).then(async (res: Response) => {
     const error = handleErrors(res);
-    if(error) throw await error
+    if (error) throw await error;
     return res.json();
   });
 };
@@ -132,7 +132,7 @@ export const addToCart = (mealId: string, quantity: number): Promise<any> => {
     }
   ).then(async (res: Response) => {
     const error = handleErrors(res);
-    if(error) throw await error
+    if (error) throw await error;
     return res.json();
   });
 };
@@ -152,7 +152,30 @@ export const getWishlist = (): Promise<any> => {
     },
   }).then(async (res: Response) => {
     const error = handleErrors(res);
-    if(error) throw await error
+    if (error) throw await error;
+    return res.json();
+  });
+};
+
+export const addToWishlist = (mealId: string): Promise<any> => {
+  const userJSON = localStorage.getItem("user");
+  if (!userJSON) {
+    return Promise.resolve(null);
+  }
+  const user = JSON.parse(userJSON);
+  const userId = user._id;
+
+  return fetch(
+    `${config.api.user.wishlist.add}?user=${userId}&meal=${mealId}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  ).then(async (res: Response) => {
+    const error = handleErrors(res);
+    if (error) throw await error;
     return res.json();
   });
 };

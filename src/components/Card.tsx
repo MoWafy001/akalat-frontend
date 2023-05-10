@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addToCart } from "../api/user";
+import { addToCart, addToWishlist } from "../api/user";
 import { toast } from "react-toastify";
 
 export const Card = ({
@@ -47,6 +47,20 @@ export const Card = ({
       });
   };
 
+  const handleAddToWishlist = async () => {
+    console.log("Add to wishlist");
+    await addToWishlist(mealId as string)
+      .then((data) => {
+        console.log(data);
+        toast.success("Added to wishlist");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Couldn't add to wishlist");
+        toast.error(err.error);
+      });
+  };
+
   return (
     <div className="card">
       <img src={image || "https://via.placeholder.com/350"} alt="meal" />
@@ -68,7 +82,7 @@ export const Card = ({
 
         {showTools && (
           <div className="card-options">
-            <button className="like">
+            <button className="like" onClick={handleAddToWishlist}>
               <img src="/heart-outline-shape.png" alt="like" />
             </button>
             <div className="quantity">
