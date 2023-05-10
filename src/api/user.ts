@@ -204,6 +204,46 @@ export const removeFromCart = (
   });
 };
 
+export const cartCheckout = (): Promise<any> => {
+  const userJSON = localStorage.getItem("user");
+  if (!userJSON) {
+    return Promise.resolve(null);
+  }
+  const user = JSON.parse(userJSON);
+  const userId = user._id;
+
+  return fetch(`${config.api.user.cart.checkout}?user=${userId}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }).then(async (res: Response) => {
+    const error = handleErrors(res);
+    if (error) throw await error;
+    return res.json();
+  });
+};
+
+export const cartFlush = (): Promise<any> => {
+  const userJSON = localStorage.getItem("user");
+  if (!userJSON) {
+    return Promise.resolve(null);
+  }
+  const user = JSON.parse(userJSON);
+  const userId = user._id;
+
+  return fetch(`${config.api.user.cart.flush}?user=${userId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }).then(async (res: Response) => {
+    const error = handleErrors(res);
+    if (error) throw await error;
+    return res.json();
+  });
+};
+
 // Wishlist
 
 export const getWishlist = (): Promise<any> => {

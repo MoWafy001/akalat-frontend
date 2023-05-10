@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
-import { getCart, removeFromCart } from "../api/user";
+import { cartCheckout, cartFlush, getCart, removeFromCart } from "../api/user";
 import { config } from "../config";
 import { toast } from "react-toastify";
 
@@ -66,6 +66,30 @@ export const Cart = ({ logout }: { logout: Function }) => {
           if (err.message === "Unauthorized") logout();
         });
     };
+  };
+
+  const handleCheckout = () => {
+    cartCheckout()
+      .then((data) => {
+        toast.success("Checkout successful");
+        setOrders([]);
+      })
+      .catch((err) => {
+        // logout if unauthorized
+        if (err.message === "Unauthorized") logout();
+      });
+  };
+
+  const handleFlush = () => {
+    cartFlush()
+      .then((data) => {
+        toast.success("Cart flushed");
+        setOrders([]);
+      })
+      .catch((err) => {
+        // logout if unauthorized
+        if (err.message === "Unauthorized") logout();
+      });
   };
 
   useEffect(() => {
@@ -146,8 +170,8 @@ export const Cart = ({ logout }: { logout: Function }) => {
               </h3>
             </div>
             <div className="order-options">
-              <button>Flush</button>
-              <button>Checkout</button>
+              <button onClick={handleFlush}>Flush</button>
+              <button onClick={handleCheckout}>Checkout</button>
             </div>
           </div>
         </div>

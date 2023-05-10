@@ -30,6 +30,8 @@ export const Home = ({
               name: meal.name,
               rate: "⭐".repeat(meal.rate),
               showTools: true,
+              price: meal.price,
+              ogPrice: meal.originalPrice,
               image: meal.image
                 ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                 : undefined,
