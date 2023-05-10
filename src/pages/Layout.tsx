@@ -22,7 +22,7 @@ export const Layout = ({
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     logout();
-    navigate("/login");
+    navigate("/");
   };
 
   return (

@@ -18,6 +18,9 @@ import { Register } from "./pages/Register";
 import { ToastContainer, toast } from "react-toastify";
 import { useState } from "react";
 import { CardPage } from "./pages/CardPage";
+import { RDLogin } from "./pages/RD-Login";
+import { LoginChoice } from "./pages/LoginChoice";
+import { RestaurantRegister } from "./pages/RestaurantRegister";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -35,6 +38,11 @@ function App() {
     setIsLoggedIn(true);
   };
 
+  const getUserRole = (): "user" | "restaurant" | "delivery" => {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    return user.role;
+  };
+
   return (
     <>
       <ToastContainer />
@@ -43,9 +51,17 @@ function App() {
         <Route path="/login" element={<Login login={login} />} />
         <Route path="/register" element={<Register />} />
 
-        {!isLoggedIn && toast("You need to login first1") && (
-          <Route path="*" element={<Navigate to="/login" />} />
+        {/* RD */}
+        <Route path="login/rd" element={<RDLogin login={login} />} />
+        <Route path="register/restaurant" element={<RestaurantRegister />} />
+
+        {!isLoggedIn && (
+          <>
+            <Route path="/" element={<LoginChoice />} />
+            <Route path="*" element={<Navigate to="/login" />} />
+          </>
         )}
+
         {isLoggedIn && (
           <Route
             path="/"
@@ -57,31 +73,42 @@ function App() {
               />
             }
           >
-            <Route
-              index
-              element={<Home logout={logout} searchTerm={searchTerm} />}
-            />
-            <Route
-              path="resturants"
-              element={<Restaurants logout={logout} />}
-            />
-            <Route path="delivery" element={<Deliveries logout={logout} />} />
-            <Route path="meals" element={<Meals logout={logout} />} />
-            <Route path="wishlist" element={<WishList />} />
-            <Route path="cart" element={<Cart logout={logout} />} />
-            <Route path="orders" element={<Orders />} />
-            <Route path="reviews" element={<Reviews />} />
-            <Route path="account" element={<Account logout={logout} />} />
+            {/* User */}
+            {getUserRole() === "user" && (
+              <>
+                <Route
+                  index
+                  element={<Home logout={logout} searchTerm={searchTerm} />}
+                />
+                <Route
+                  path="resturants"
+                  element={<Restaurants logout={logout} />}
+                />
+                <Route
+                  path="delivery"
+                  element={<Deliveries logout={logout} />}
+                />
+                <Route path="meals" element={<Meals logout={logout} />} />
+                <Route path="wishlist" element={<WishList />} />
+                <Route path="cart" element={<Cart logout={logout} />} />
+                <Route path="orders" element={<Orders />} />
+                <Route path="reviews" element={<Reviews />} />
+                <Route path="account" element={<Account logout={logout} />} />
 
-            <Route path="meals/:id" element={<CardPage logout={logout} />} />
-            <Route
-              path="restaurants/:id"
-              element={<CardPage logout={logout} />}
-            />
-            <Route
-              path="deliveries/:id"
-              element={<CardPage logout={logout} />}
-            />
+                <Route
+                  path="meals/:id"
+                  element={<CardPage logout={logout} />}
+                />
+                <Route
+                  path="restaurants/:id"
+                  element={<CardPage logout={logout} />}
+                />
+                <Route
+                  path="deliveries/:id"
+                  element={<CardPage logout={logout} />}
+                />
+              </>
+            )}
           </Route>
         )}
 

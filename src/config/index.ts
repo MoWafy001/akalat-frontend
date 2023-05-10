@@ -39,5 +39,13 @@ export const config = {
         accept: API_URL + "user/order/accepteOrder",
       },
     },
+    restaurant: {
+      register: API_URL + "restaurant/register",
+      login: API_URL + "restaurant/login",
+    },
+    delivery: {
+      register: API_URL + "delivery/register",
+      login: API_URL + "delivery/login",
+    },
   },
 };
