@@ -27,6 +27,7 @@ export const Home = ({ logout }: { logout: Function }) => {
               image: meal.image
                 ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                 : undefined,
+              mealId: meal._id, 
             };
           })
         );

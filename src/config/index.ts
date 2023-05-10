@@ -21,6 +21,7 @@ export const config = {
       update: API_URL + "user/update",
       cart: {
         get: API_URL + "user/cart/get",
+        add: API_URL + "user/cart/item",
       },
       wishlist: {
         get: API_URL + "user/wishlist/get",

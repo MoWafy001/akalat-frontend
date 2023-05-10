@@ -9,7 +9,7 @@ const handleErrors = (res: Response) => {
       throw new Error("Unauthorized");
     }
 
-    throw new Error(res.statusText);
+    return res.json();
   }
 };
 
@@ -20,7 +20,8 @@ export const listMeals = (): Promise<any> => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then(async (res: Response) => {
-    handleErrors(res);
+    const error = handleErrors(res);
+    if(error) throw await error
     return res.json();
   });
 };
@@ -32,7 +33,8 @@ export const listRestaurants = (): Promise<any> => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then(async (res: Response) => {
-    handleErrors(res);
+    const error = handleErrors(res);
+    if(error) throw await error
     return res.json();
   });
 };
@@ -44,7 +46,8 @@ export const listDeliveries = (): Promise<any> => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then(async (res: Response) => {
-    handleErrors(res);
+    const error = handleErrors(res);
+    if(error) throw await error
     return res.json();
   });
 };
@@ -63,7 +66,8 @@ export const getCurrentUser = (): Promise<any> => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then(async (res: Response) => {
-    handleErrors(res);
+    const error = handleErrors(res);
+    if(error) throw await error
     return res.json();
   });
 };
@@ -84,7 +88,8 @@ export const updateCurrentUser = (data: any): Promise<any> => {
     },
     body: JSON.stringify(data),
   }).then(async (res: Response) => {
-    handleErrors(res);
+    const error = handleErrors(res);
+    if(error) throw await error
     return res.json();
   });
 };
@@ -103,7 +108,31 @@ export const getCart = (): Promise<any> => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then(async (res: Response) => {
-    handleErrors(res);
+    const error = handleErrors(res);
+    if(error) throw await error
+    return res.json();
+  });
+};
+
+export const addToCart = (mealId: string, quantity: number): Promise<any> => {
+  const userJSON = localStorage.getItem("user");
+  if (!userJSON) {
+    return Promise.resolve(null);
+  }
+  const user = JSON.parse(userJSON);
+  const userId = user._id;
+
+  return fetch(
+    `${config.api.user.cart.add}?user=${userId}&meal=${mealId}&quantity=${quantity}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  ).then(async (res: Response) => {
+    const error = handleErrors(res);
+    if(error) throw await error
     return res.json();
   });
 };
@@ -122,7 +151,8 @@ export const getWishlist = (): Promise<any> => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then(async (res: Response) => {
-    handleErrors(res);
+    const error = handleErrors(res);
+    if(error) throw await error
     return res.json();
   });
 };

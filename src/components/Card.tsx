@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { addToCart } from "../api/user";
+import { toast } from "react-toastify";
 
 export const Card = ({
   price,
@@ -9,6 +11,7 @@ export const Card = ({
   showRemove = false,
   review,
   image,
+  mealId,
 }: {
   price?: string;
   ogPrice?: string;
@@ -18,6 +21,7 @@ export const Card = ({
   showRemove?: boolean;
   review?: string;
   image?: string;
+  mealId?: string;
 }) => {
   const [quantity, setQuantity] = useState(1);
 
@@ -27,6 +31,20 @@ export const Card = ({
 
   const decreaseQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1);
+  };
+
+  const handleAddToCart = async () => {
+    console.log("Add to cart");
+    await addToCart(mealId as string, quantity)
+      .then((data) => {
+        console.log(data);
+        toast.success("Added to cart");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Couldn't add to cart");
+        toast.error(err.error);
+      });
   };
 
   return (
@@ -58,7 +76,7 @@ export const Card = ({
               <span>{quantity}</span>
               <button onClick={increaseQuantity}>+</button>
             </div>
-            <button className="cart-add">
+            <button className="cart-add" onClick={handleAddToCart}>
               <img src="/shopping-cart.png" alt="cart" />
             </button>
           </div>
