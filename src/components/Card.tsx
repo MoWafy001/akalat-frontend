@@ -63,7 +63,9 @@ export const Card = ({
 
   return (
     <div className="card">
-      <img src={image || "https://via.placeholder.com/350"} alt="meal" />
+      {image && (
+        <img src={image || "https://via.placeholder.com/350"} alt="meal" />
+      )}
       <div className="card-info">
         <div className="card-price">
           <span>{price}</span>

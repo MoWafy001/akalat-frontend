@@ -17,6 +17,7 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { ToastContainer, toast } from "react-toastify";
 import { useState } from "react";
+import { MealPage } from "./pages/MealPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -58,6 +59,9 @@ function App() {
             <Route path="orders" element={<Orders />} />
             <Route path="reviews" element={<Reviews />} />
             <Route path="account" element={<Account logout={logout} />} />
+
+            {/* meal page */}
+            <Route path="meals/:id" element={<MealPage />} />
           </Route>
         )}
 

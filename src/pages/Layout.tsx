@@ -23,7 +23,7 @@ export const Layout = ({ logout }: { logout: Function }) => {
         {/* logo */}
         <div className="nav-logo">
           <Link to="/">
-            <img src="akalat-logo.png" alt="logo" />
+            <img src="/akalat-logo.png" alt="logo" />
             <span>Akalat</span>
           </Link>
         </div>
@@ -77,7 +77,7 @@ export const Layout = ({ logout }: { logout: Function }) => {
           </Link>
           <Link to="/cart">
             <li>
-              <img src="shopping-cart.png" alt="cart" />
+              <img src="/shopping-cart.png" alt="cart" />
             </li>
           </Link>
           {/* hamburger menu */}
@@ -87,7 +87,7 @@ export const Layout = ({ logout }: { logout: Function }) => {
                 setShowMenu(!showMenu);
               }}
             >
-              <img src="menu.png" alt="menu" />
+              <img src="/menu.png" alt="menu" />
             </button>
             {showMenu && (
               <div className="menu hamberger">
