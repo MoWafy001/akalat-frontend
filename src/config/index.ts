@@ -5,6 +5,7 @@ export const config = {
   api: {
     host: API_HOST,
     url: API_URL,
+    // User
     user: {
       register: API_URL + "user/register",
       login: API_URL + "user/login",
@@ -39,10 +40,30 @@ export const config = {
         accept: API_URL + "user/order/accepteOrder",
       },
     },
+    // Restaurant
     restaurant: {
       register: API_URL + "restaurant/register",
       login: API_URL + "restaurant/login",
+      meal: {
+        list: API_URL + "restaurant/meal/list",
+        get: API_URL + "restaurant/meal/get",
+      },
+      restaurant: {
+        list: API_URL + "restaurant/restaurant/list",
+        get: API_URL + "restaurant/restaurant/get",
+      },
+      delivery: {
+        list: API_URL + "restaurant/delivery/list",
+        get: API_URL + "restaurant/delivery/get",
+      },
+      get: API_URL + "restaurant/get",
+      update: API_URL + "restaurant/update",
+      orders: {
+        list: API_URL + "restaurant/order/list",
+        accept: API_URL + "restaurant/order/accepteOrder",
+      },
     },
+    // Delivery
     delivery: {
       register: API_URL + "delivery/register",
       login: API_URL + "delivery/login",

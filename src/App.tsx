@@ -21,6 +21,10 @@ import { CardPage } from "./pages/CardPage";
 import { RDLogin } from "./pages/RD-Login";
 import { LoginChoice } from "./pages/LoginChoice";
 import { RestaurantRegister } from "./pages/RestaurantRegister";
+import { RHome } from "./pages/restaurant/Home";
+import { RMeals } from "./pages/restaurant/Meals";
+import { RDeliveries } from "./pages/restaurant/Deliveries";
+import { RCardPage } from "./pages/restaurant/CardPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -31,7 +35,7 @@ function App() {
   const logout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    window.location.href = "/login";
+    window.location.href = "/";
   };
 
   const login = () => {
@@ -70,6 +74,7 @@ function App() {
                 logout={logout}
                 setSearchTerm={setSearchTerm}
                 searchTerm={searchTerm}
+                getUserRole={getUserRole}
               />
             }
           >
@@ -106,6 +111,34 @@ function App() {
                 <Route
                   path="deliveries/:id"
                   element={<CardPage logout={logout} />}
+                />
+              </>
+            )}
+
+            {/* Restaurant */}
+            {getUserRole() === "restaurant" && (
+              <>
+                <Route
+                  path="/"
+                  element={<RHome logout={logout} searchTerm={searchTerm} />}
+                />
+
+                <Route
+                  path="delivery"
+                  element={<RDeliveries logout={logout} />}
+                />
+                <Route path="meals" element={<RMeals logout={logout} />} />
+                {/* <Route path="orders" element={<Orders />} /> */}
+                {/* <Route path="reviews" element={<Reviews />} /> */}
+                {/* <Route path="account" element={<Account logout={logout} />} /> */}
+
+                <Route
+                  path="meals/:id"
+                  element={<RCardPage logout={logout} />}
+                />
+                <Route
+                  path="deliveries/:id"
+                  element={<RCardPage logout={logout} />}
                 />
               </>
             )}

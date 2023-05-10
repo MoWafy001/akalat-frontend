@@ -4,11 +4,14 @@ export const Layout = ({
   logout,
   setSearchTerm,
   searchTerm,
+  getUserRole,
 }: {
   logout: Function;
   setSearchTerm: Function;
   searchTerm: string;
+  getUserRole: Function;
 }) => {
+  const userRole = getUserRole();
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -62,7 +65,10 @@ export const Layout = ({
 
             {showSearchOptions && (
               <div className="menu search hamberger">
-                <Link to="/resturants">Resturants</Link>
+                {userRole === "user" && (
+                  <Link to="/resturants">Resturants</Link>
+                )}
+
                 <Link to="/delivery">Delivery</Link>
                 <Link to="/meals">Meals</Link>
               </div>
@@ -72,9 +78,12 @@ export const Layout = ({
 
         {/* nav links 1 */}
         <ul className="nav-links">
-          <Link to="/resturants">
-            <li>Resturants</li>
-          </Link>
+          {userRole === "user" && (
+            <Link to="/resturants">
+              <li>Resturants</li>
+            </Link>
+          )}
+
           <Link to="/delivery">
             <li>Delivery</li>
           </Link>
@@ -85,16 +94,21 @@ export const Layout = ({
 
         {/* nav links 2 */}
         <ul className="nav-links nav-right">
-          <Link to="/wishlist">
-            <li>
-              <img src="/heart-outline-shape.png" alt="wishlist" />
-            </li>
-          </Link>
-          <Link to="/cart">
-            <li>
-              <img src="/shopping-cart.png" alt="cart" />
-            </li>
-          </Link>
+          {userRole === "user" && (
+            <>
+              <Link to="/wishlist">
+                <li>
+                  <img src="/heart-outline-shape.png" alt="wishlist" />
+                </li>
+              </Link>
+              <Link to="/cart">
+                <li>
+                  <img src="/shopping-cart.png" alt="cart" />
+                </li>
+              </Link>
+            </>
+          )}
+
           {/* hamburger menu */}
           <li className="menu-holder">
             <button
