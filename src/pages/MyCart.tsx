@@ -1,33 +1,10 @@
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
-import { getCart } from "../api/user";
+import { getCart, removeFromCart } from "../api/user";
 import { config } from "../config";
+import { toast } from "react-toastify";
 
 export const Cart = ({ logout }: { logout: Function }) => {
-  const testMeal = Card({
-    price: "30 L.E",
-    ogPrice: "40 L.E",
-    name: "Chicken shawarma",
-    rate: "⭐ ⭐ ⭐ ⭐",
-    showTools: false,
-    showRemove: true,
-    cardPagePath: "/meals/123",
-  });
-
-  const meals = [testMeal, testMeal, testMeal];
-
-  // const orders = [
-  //   {
-  //     restaurant: {
-  //       name: "Koshary El Tahrir",
-  //       img: "https://via.placeholder.com/350x150",
-  //     },
-  //     meals: meals,
-  //     total: "180 L.E",
-  //     ogTotal: "240 L.E",
-  //   },
-  // ];
-
   const [orders, setOrders] = useState(
     [] as {
       restaurant: {
@@ -39,6 +16,57 @@ export const Cart = ({ logout }: { logout: Function }) => {
       ogTotal: string;
     }[]
   );
+
+  const generateCardRemove = (mealId: string, quantity: number) => {
+    return () => {
+      removeFromCart(mealId, quantity)
+        .then(() => {
+          toast.success("Removed from cart");
+          getCart()
+            .then((data) => {
+              const record = data.record;
+              const { items, restaurant, total, originalTotal } = record;
+              setOrders([
+                {
+                  restaurant: {
+                    name: restaurant ? restaurant.name : "",
+                    img: restaurant
+                      ? config.api.host +
+                        restaurant.image.path.replace(/\\/g, "/")
+                      : "",
+                  },
+                  meals: items.map((item: any) => {
+                    const meal = item.meal;
+                    return {
+                      price: meal.price,
+                      ogPrice: meal.originalPrice,
+                      name: meal.name,
+                      rate: "⭐".repeat(meal.rate),
+                      showTools: false,
+                      showRemove: true,
+                      image: meal.image
+                        ? config.api.host +
+                          meal.image[0].path.replace(/\\/g, "/")
+                        : undefined,
+                      cardPagePath: `/meals/${meal._id}`,
+                    };
+                  }),
+                  total: total,
+                  ogTotal: originalTotal,
+                },
+              ]);
+            })
+            .catch((err) => {
+              // logout if unauthorized
+              if (err.message === "Unauthorized") logout();
+            });
+        })
+        .catch((err) => {
+          // logout if unauthorized
+          if (err.message === "Unauthorized") logout();
+        });
+    };
+  };
 
   useEffect(() => {
     getCart()
@@ -62,6 +90,7 @@ export const Cart = ({ logout }: { logout: Function }) => {
                 rate: "⭐".repeat(meal.rate),
                 showTools: false,
                 showRemove: true,
+                removeFunction: generateCardRemove(meal._id, item.quantity),
                 image: meal.image
                   ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                   : undefined,

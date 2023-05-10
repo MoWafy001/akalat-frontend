@@ -133,6 +133,8 @@ export const updateCurrentUser = (data: any): Promise<any> => {
   });
 };
 
+// Cart
+
 export const getCart = (): Promise<any> => {
   const userJSON = localStorage.getItem("user");
   if (!userJSON) {
@@ -165,6 +167,32 @@ export const addToCart = (mealId: string, quantity: number): Promise<any> => {
     `${config.api.user.cart.add}?user=${userId}&meal=${mealId}&quantity=${quantity}`,
     {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  ).then(async (res: Response) => {
+    const error = handleErrors(res);
+    if (error) throw await error;
+    return res.json();
+  });
+};
+
+export const removeFromCart = (
+  mealId: string,
+  quantity: number
+): Promise<any> => {
+  const userJSON = localStorage.getItem("user");
+  if (!userJSON) {
+    return Promise.resolve(null);
+  }
+  const user = JSON.parse(userJSON);
+  const userId = user._id;
+
+  return fetch(
+    `${config.api.user.cart.delete}?user=${userId}&meal=${mealId}&quantity=${quantity}`,
+    {
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

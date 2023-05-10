@@ -28,8 +28,8 @@
     gap: 5px;
     padding: 2rem;
     border-radius: inherit;
-
     border: 1px solid #000;
+
     .order-meals {
       border-radius: inherit;
       background: #ffa515ad;
@@ -37,6 +37,12 @@
       align-items: center;
       justify-content: center;
       width: 100%;
+
+      .card{
+        img{
+          height: 200px;
+        }
+      }
     }
 
     .order-total{

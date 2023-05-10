@@ -25,6 +25,7 @@ export const config = {
       cart: {
         get: API_URL + "user/cart/get",
         add: API_URL + "user/cart/item",
+        delete: API_URL + "user/cart/item",
       },
       wishlist: {
         get: API_URL + "user/wishlist/get",

@@ -105,7 +105,7 @@ export const CardPage = ({ logout }: { logout: Function }) => {
         <div className="col col-2 text-center p-1">
           <Slider slidesToScroll={1} slidesToShow={1} autoplay={true}>
             {data.images.map((image: string, index: number) => (
-              <img src={image} alt="" key={index} />
+              <img src={image} alt="" key={index} className="card-page-image"/>
             ))}
           </Slider>
         </div>
