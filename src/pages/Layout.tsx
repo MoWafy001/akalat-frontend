@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-export const Layout = ({ logout }: { logout: Function }) => {
+export const Layout = ({
+  logout,
+  setSearchTerm,
+  searchTerm,
+}: {
+  logout: Function;
+  setSearchTerm: Function;
+  searchTerm: string;
+}) => {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -34,7 +42,14 @@ export const Layout = ({ logout }: { logout: Function }) => {
               <img src="/zoomer.png" alt="search" />
             </button>
 
-            <input type="text" placeholder="Search" />
+            <input
+              type="text"
+              placeholder="Search"
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+              }}
+              value={searchTerm}
+            />
 
             <button
               className="humberger-menu"

@@ -10,7 +10,13 @@ import { useEffect, useState } from "react";
 import { listDeliveries, listMeals, listRestaurants } from "../api/user";
 import { config } from "../config";
 
-export const Home = ({ logout }: { logout: Function }) => {
+export const Home = ({
+  logout,
+  searchTerm,
+}: {
+  logout: Function;
+  searchTerm: string;
+}) => {
   const [meals, setMeals] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
   const [deliveries, setDeliveries] = useState([]);
@@ -89,33 +95,57 @@ export const Home = ({ logout }: { logout: Function }) => {
         <div className="section">
           <h2>Meals</h2>
           <Slider slidesToScroll={4} slidesToShow={4} autoplay={true}>
-            {meals.map((meal: any, index) => (
-              <div key={index}>
-                <Card {...meal} />
-              </div>
-            ))}
+            {meals.map((meal: any, index) => {
+              if (
+                searchTerm &&
+                !meal.name.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+                return null;
+
+              return (
+                <div key={index}>
+                  <Card {...meal} />
+                </div>
+              );
+            })}
           </Slider>
         </div>
 
         <div className="section">
           <h2>Restaurants</h2>
           <Slider slidesToScroll={4} slidesToShow={4} autoplay={false}>
-            {restaurants.map((rest: any, index) => (
-              <div key={index}>
-                <Card {...rest} />
-              </div>
-            ))}
+            {restaurants.map((rest: any, index) => {
+              if (
+                searchTerm &&
+                !rest.name.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+                return null;
+
+              return (
+                <div key={index}>
+                  <Card {...rest} />
+                </div>
+              );
+            })}
           </Slider>
         </div>
 
         <div className="section">
           <h2>Delivery</h2>
           <Slider slidesToScroll={4} slidesToShow={4} autoplay={false}>
-            {deliveries.map((delivery: any, index) => (
-              <div key={index}>
-                <Card {...delivery} />
-              </div>
-            ))}
+            {deliveries.map((delivery: any, index) => {
+              if (
+                searchTerm &&
+                !delivery.name.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+                return null;
+
+              return (
+                <div key={index}>
+                  <Card {...delivery} />
+                </div>
+              );
+            })}
           </Slider>
         </div>
       </div>

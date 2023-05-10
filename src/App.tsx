@@ -23,6 +23,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("token") ? true : false
   );
+  const [searchTerm, setSearchTerm] = useState("");
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -46,8 +47,20 @@ function App() {
           <Route path="*" element={<Navigate to="/login" />} />
         )}
         {isLoggedIn && (
-          <Route path="/" element={<Layout logout={logout} />}>
-            <Route index element={<Home logout={logout} />} />
+          <Route
+            path="/"
+            element={
+              <Layout
+                logout={logout}
+                setSearchTerm={setSearchTerm}
+                searchTerm={searchTerm}
+              />
+            }
+          >
+            <Route
+              index
+              element={<Home logout={logout} searchTerm={searchTerm} />}
+            />
             <Route
               path="resturants"
               element={<Restaurants logout={logout} />}
@@ -61,8 +74,14 @@ function App() {
             <Route path="account" element={<Account logout={logout} />} />
 
             <Route path="meals/:id" element={<CardPage logout={logout} />} />
-            <Route path="restaurants/:id" element={<CardPage logout={logout} />} />
-            <Route path="deliveries/:id" element={<CardPage logout={logout} />} />
+            <Route
+              path="restaurants/:id"
+              element={<CardPage logout={logout} />}
+            />
+            <Route
+              path="deliveries/:id"
+              element={<CardPage logout={logout} />}
+            />
           </Route>
         )}
 
