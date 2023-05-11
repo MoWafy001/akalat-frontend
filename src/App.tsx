@@ -29,6 +29,9 @@ import { RNewMeal } from "./pages/restaurant/NewMeal";
 import { RAccount } from "./pages/restaurant/account";
 import { ROrders } from "./pages/restaurant/Orders";
 import { RAssignDelivery } from "./pages/restaurant/AssignDelivery";
+import { DOrders } from "./pages/delivery/Orders";
+import { DCardPage } from "./pages/delivery/CardPage";
+import { DAccount } from "./pages/delivery/account";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -66,7 +69,7 @@ function App() {
         {!isLoggedIn && (
           <>
             <Route path="/" element={<LoginChoice />} />
-            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </>
         )}
 
@@ -152,6 +155,24 @@ function App() {
                 <Route
                   path="deliveries/:id"
                   element={<RCardPage logout={logout} />}
+                />
+              </>
+            )}
+
+            {/* Delivery */}
+            {getUserRole() === "delivery" && (
+              <>
+                <Route path="/" element={<DOrders />} />
+                {/* <Route path="reviews" element={<Reviews />} /> */}
+                <Route path="account" element={<DAccount logout={logout} />} />
+
+                <Route
+                  path="meals/:id"
+                  element={<DCardPage logout={logout} />}
+                />
+                <Route
+                  path="restaurants/:id"
+                  element={<DCardPage logout={logout} />}
                 />
               </>
             )}

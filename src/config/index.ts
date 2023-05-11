@@ -50,10 +50,6 @@ export const config = {
         create: API_URL + "restaurant/meal/create",
         addImage: API_URL + "restaurant/meal/addImage",
       },
-      restaurant: {
-        list: API_URL + "restaurant/restaurant/list",
-        get: API_URL + "restaurant/restaurant/get",
-      },
       delivery: {
         list: API_URL + "restaurant/delivery/list",
         get: API_URL + "restaurant/delivery/get",
@@ -70,6 +66,18 @@ export const config = {
     delivery: {
       register: API_URL + "delivery/register",
       login: API_URL + "delivery/login",
+      get: API_URL + "delivery/get",
+      update: API_URL + "delivery/update",
+      orders: {
+        list: API_URL + "delivery/order/list",
+        checkout: API_URL + "delivery/order/checkout",
+      },
+      meal: {
+        get: API_URL + "delivery/meal/get",
+      },
+      restaurant: {
+        get: API_URL + "delivery/restaurant/get",
+      },
     },
   },
 };
