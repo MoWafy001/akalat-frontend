@@ -17,7 +17,7 @@ export const RMeals = ({ logout }: { logout: Function }) => {
             return {
               name: meal.name,
               rate: "⭐".repeat(meal.rate),
-              showTools: true,
+              showTools: false,
               image: meal.image.length
                 ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                 : undefined,

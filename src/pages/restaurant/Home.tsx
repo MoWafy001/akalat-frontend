@@ -28,7 +28,7 @@ export const RHome = ({
             return {
               name: meal.name,
               rate: "⭐".repeat(meal.rate),
-              showTools: true,
+              showTools: false,
               price: meal.price,
               ogPrice: meal.originalPrice,
               image: meal.image.length
