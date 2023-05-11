@@ -39,7 +39,7 @@ export const Layout = ({
           </Link>
         </div>
 
-        {isHome && (
+        {isHome && userRole !== "delivery" && (
           <div className="nav-search menu-holder">
             <button>
               <img src="/zoomer.png" alt="search" />
@@ -84,12 +84,16 @@ export const Layout = ({
             </Link>
           )}
 
-          <Link to="/delivery">
-            <li>Delivery</li>
-          </Link>
-          <Link to="/meals">
-            <li>Meals</li>
-          </Link>
+          {userRole !== "delivery" && (
+            <>
+              <Link to="/delivery">
+                <li>Delivery</li>
+              </Link>
+              <Link to="/meals">
+                <li>Meals</li>
+              </Link>
+            </>
+          )}
         </ul>
 
         {/* nav links 2 */}
@@ -120,7 +124,7 @@ export const Layout = ({
             </button>
             {showMenu && (
               <div className="menu hamberger">
-                <Link to="/orders">My Orders</Link>
+                {userRole !== "delivery" && <Link to="/orders">My Orders</Link>}
                 <Link to="/reviews">My Reviews</Link>
                 <div className="divider"></div>
                 <Link to="/account">My Account</Link>
