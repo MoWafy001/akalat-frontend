@@ -11,10 +11,14 @@ export const DOrders = () => {
   const [activeOrderType, setActiveOrderType] = useState("pending");
   const navigate = useNavigate();
 
-  const handleCheckout = (userId: string, restaurantId: string) => {
+  const handleCheckout = (
+    userId: string,
+    restaurantId: string,
+    orderId: string
+  ) => {
     return () => {
       navigate(`/restaurants/${restaurantId}`);
-      checkout(userId, restaurantId)
+      checkout(userId, restaurantId, orderId)
         .then((data) => {
           console.log(data);
           toast.success("Order checked out successfully");
@@ -174,7 +178,8 @@ export const DOrders = () => {
                     className="status to-accept"
                     onClick={handleCheckout(
                       order.user._id,
-                      order.restaurant._id
+                      order.restaurant._id,
+                      order.id
                     )}
                   >
                     Checkout

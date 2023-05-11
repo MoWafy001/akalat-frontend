@@ -11,10 +11,14 @@ export const Orders = () => {
   const [activeOrderType, setActiveOrderType] = useState("pending");
   const navigate = useNavigate();
 
-  const handleAcceptOrder = (deliveryId: string, restaurantId: string) => {
+  const handleAcceptOrder = (
+    deliveryId: string,
+    restaurantId: string,
+    orderId: string
+  ) => {
     return () => {
       navigate(`/meals`);
-      acceptOrder(deliveryId, restaurantId)
+      acceptOrder(deliveryId, restaurantId, orderId)
         .then((data) => {
           console.log(data);
           toast.success("Order accepted successfully");
@@ -34,6 +38,7 @@ export const Orders = () => {
       setOrders(
         orders.map((order: any) => {
           return {
+            id: order._id,
             status: order.status,
             acceptedUser: order.acceptedUser,
             restaurant: {
@@ -161,7 +166,8 @@ export const Orders = () => {
                       className="status to-accept"
                       onClick={handleAcceptOrder(
                         order.delivery._id,
-                        order.restaurant._id
+                        order.restaurant._id,
+                        order.id
                       )}
                     >
                       click to accept

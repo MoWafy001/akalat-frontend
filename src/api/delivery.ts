@@ -105,7 +105,8 @@ export const getOrders = (): Promise<any> => {
 
 export const checkout = (
   customerId: string,
-  restaurantId: string
+  restaurantId: string,
+  orderId: string
 ): Promise<any> => {
   const userJSON = localStorage.getItem("user");
   if (!userJSON) {
@@ -115,7 +116,7 @@ export const checkout = (
   const deliveryId = user._id;
 
   return fetch(
-    `${config.api.delivery.orders.checkout}?delivery=${deliveryId}&user=${customerId}&restaurant=${restaurantId}`,
+    `${config.api.delivery.orders.checkout}?delivery=${deliveryId}&user=${customerId}&restaurant=${restaurantId}&order=${orderId}`,
     {
       method: "PUT",
       headers: {
