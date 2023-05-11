@@ -75,9 +75,9 @@ export const RestaurantRegister = () => {
           <input required type="text" name="phone" placeholder="phone" />
           <input required type="text" name="url" placeholder="URL" />
         </div>
-        <Link to="/forgot" className="forgot-link">
+        {/* <Link to="/forgot" className="forgot-link">
           Forgot password?
-        </Link>
+        </Link> */}
 
         <button className="auth-button" type="submit">
           Login
