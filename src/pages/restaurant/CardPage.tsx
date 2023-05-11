@@ -87,7 +87,13 @@ export const RCardPage = ({ logout }: { logout: Function }) => {
   }, [id, type]);
 
   return (
-    <div className="card-page container">
+    <div
+      className="card-page container"
+      style={{
+        marginBottom: "100px",
+        marginTop: "100px",
+      }}
+    >
       <div className="sec1 row d-flex p-2 justify-center align-center">
         <div className="col col-2 text-center p-1">
           <Slider slidesToScroll={1} slidesToShow={1} autoplay={true}>
@@ -130,13 +136,13 @@ export const RCardPage = ({ logout }: { logout: Function }) => {
       </div>
 
       {/* reviews */}
-      <div className="page-elements my-5">
+      {/* <div className="page-elements my-5">
         {restaurants.map((restaurant, index) => (
           <div key={index}>
             <Card {...restaurant} />
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

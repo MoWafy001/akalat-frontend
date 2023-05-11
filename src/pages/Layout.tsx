@@ -125,7 +125,7 @@ export const Layout = ({
             {showMenu && (
               <div className="menu hamberger">
                 {userRole !== "delivery" && <Link to="/orders">My Orders</Link>}
-                <Link to="/reviews">My Reviews</Link>
+                {/* <Link to="/reviews">My Reviews</Link> */}
                 <div className="divider"></div>
                 <Link to="/account">My Account</Link>
                 <Link to="" onClick={handleLogout}>

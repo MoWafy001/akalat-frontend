@@ -12,7 +12,7 @@ export const Card = ({
   showRemove = false,
   removeFunction,
   review,
-  image,
+  image = "https://via.placeholder.com/350",
   mealId,
   cardPagePath,
   restaurantName,
@@ -89,18 +89,18 @@ export const Card = ({
           {name}
         </Link>
 
-        {restaurantName && <span
-        className="fs-6 text-muted fw-lighter"
-        >{restaurantName}</span>}
+        {restaurantName && (
+          <span className="fs-6 text-muted fw-lighter">{restaurantName}</span>
+        )}
 
-        {review && (
+        {/* {review && (
           <div className="card-review">
             <span className="review-title">Review:</span>
             <span className="review-body">{review}</span>
           </div>
-        )}
+        )} */}
 
-        <span className="card-rate">{rate}</span>
+        {/* <span className="card-rate">{rate}</span> */}
 
         {showTools && (
           <div className="card-options">
