@@ -53,6 +53,8 @@ export const config = {
       delivery: {
         list: API_URL + "restaurant/delivery/list",
         get: API_URL + "restaurant/delivery/get",
+        create: API_URL + "restaurant/delivery/create",
+        addImage: API_URL + "restaurant/delivery/image",
       },
       get: API_URL + "restaurant/get",
       update: API_URL + "restaurant/update",

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { config } from "../../config";
 import { listDeliveries } from "../../api/restaurant";
+import { Link } from "react-router-dom";
 
 export const RDeliveries = ({ logout }: { logout: Function }) => {
   const [deliveries, setDeliveries] = useState([]);
@@ -45,6 +46,16 @@ export const RDeliveries = ({ logout }: { logout: Function }) => {
             setSearchTerm(event.target.value);
           }}
         />
+      </div>
+
+      {/* add review button */}
+      <div className="sec2 row mb-4">
+        <Link
+          to="/deliveries/new"
+          className="btn btn-warning col col-3 p-3 mx-auto"
+        >
+          Add Delivery
+        </Link>
       </div>
 
       <div className="page-elements">

@@ -139,3 +139,31 @@ export const applyOrder = (
     if (error) throw await error;
   });
 };
+
+export const createDelivery = (data: {
+  name: string;
+  email: string;
+  password: string;
+  address: string;
+  phone: string;
+  gender: string;
+}): Promise<any> => {
+  const userJSON = localStorage.getItem("user");
+  if (!userJSON) {
+    return Promise.resolve(null);
+  }
+  const user = JSON.parse(userJSON);
+  const userId = user._id;
+
+  return fetch(`${config.api.restaurant.delivery.create}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ...data, restaurant: userId }),
+  }).then(async (res: Response) => {
+    const error = handleErrors(res);
+    if (error) throw await error;
+  });
+};

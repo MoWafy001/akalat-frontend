@@ -32,6 +32,7 @@ import { RAssignDelivery } from "./pages/restaurant/AssignDelivery";
 import { DOrders } from "./pages/delivery/Orders";
 import { DCardPage } from "./pages/delivery/CardPage";
 import { DAccount } from "./pages/delivery/account";
+import { RNewDelivery } from "./pages/restaurant/NewDelivery";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -146,6 +147,10 @@ function App() {
                 <Route
                   path="meals/new"
                   element={<RNewMeal logout={logout} />}
+                />
+                <Route
+                  path="deliveries/new"
+                  element={<RNewDelivery logout={logout} />}
                 />
 
                 <Route
