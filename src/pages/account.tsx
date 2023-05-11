@@ -17,7 +17,7 @@ export const Account = ({ logout }: { logout: Function }) => {
   const handleUpdate = () => {
     const { name, email, address, phone } = currentUser;
 
-    updateCurrentUser({ name, address, phone })
+    updateCurrentUser({ name, address, phone, email })
       .then(() => {
         setEditMode(false);
         toast.success("Account updated successfully");
