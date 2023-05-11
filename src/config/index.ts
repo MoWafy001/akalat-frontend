@@ -47,6 +47,8 @@ export const config = {
       meal: {
         list: API_URL + "restaurant/meal/list",
         get: API_URL + "restaurant/meal/get",
+        create: API_URL + "restaurant/meal/create",
+        addImage: API_URL + "restaurant/meal/addImage",
       },
       restaurant: {
         list: API_URL + "restaurant/restaurant/list",

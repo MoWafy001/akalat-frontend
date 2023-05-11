@@ -129,13 +129,6 @@ export const RCardPage = ({ logout }: { logout: Function }) => {
         </div>
       </div>
 
-      {/* add review button */}
-      <div className="sec2 row">
-        <button className="btn btn-warning col col-4 mx-auto my-4`">
-          Add Review
-        </button>
-      </div>
-
       {/* reviews */}
       <div className="page-elements my-5">
         {restaurants.map((restaurant, index) => (

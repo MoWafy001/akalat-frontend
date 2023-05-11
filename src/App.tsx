@@ -25,6 +25,7 @@ import { RHome } from "./pages/restaurant/Home";
 import { RMeals } from "./pages/restaurant/Meals";
 import { RDeliveries } from "./pages/restaurant/Deliveries";
 import { RCardPage } from "./pages/restaurant/CardPage";
+import { RNewMeal } from "./pages/restaurant/NewMeal";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -131,6 +132,11 @@ function App() {
                 {/* <Route path="orders" element={<Orders />} /> */}
                 {/* <Route path="reviews" element={<Reviews />} /> */}
                 {/* <Route path="account" element={<Account logout={logout} />} /> */}
+
+                <Route
+                  path="meals/new"
+                  element={<RNewMeal logout={logout} />}
+                />
 
                 <Route
                   path="meals/:id"

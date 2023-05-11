@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { config } from "../../config";
 import { listMeals } from "../../api/restaurant";
+import { Link } from "react-router-dom";
 
 export const RMeals = ({ logout }: { logout: Function }) => {
   const [meals, setMeals] = useState([]);
@@ -17,7 +18,7 @@ export const RMeals = ({ logout }: { logout: Function }) => {
               name: meal.name,
               rate: "⭐".repeat(meal.rate),
               showTools: true,
-              image: meal.image
+              image: meal.image.length
                 ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                 : undefined,
               cardPagePath: `/meals/${meal._id}`,
@@ -28,6 +29,8 @@ export const RMeals = ({ logout }: { logout: Function }) => {
       .catch((err) => {
         // logout if unauthorized
         if (err.message === "Unauthorized") logout();
+
+        console.log(err);
       });
   }, [logout]);
 
@@ -45,6 +48,13 @@ export const RMeals = ({ logout }: { logout: Function }) => {
             setSearchTerm(event.target.value);
           }}
         />
+      </div>
+
+       {/* add review button */}
+      <div className="sec2 row mb-4">
+        <Link to="/meals/new" className="btn btn-warning col col-3 p-3 mx-auto">
+          Add Meal
+        </Link>
       </div>
 
       <div className="page-elements">
