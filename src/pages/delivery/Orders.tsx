@@ -173,7 +173,7 @@ export const DOrders = () => {
                   ))}
                 </Slider>
 
-                {order.acceptedUser === "accepted" && (
+                {order.acceptedUser === "accepted" && order.status !== "accepted" && (
                   <span
                     className="status to-accept"
                     onClick={handleCheckout(
