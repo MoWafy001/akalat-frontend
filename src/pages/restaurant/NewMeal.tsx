@@ -43,12 +43,12 @@ export const RNewMeal = ({ logout }: { logout: Function }) => {
           throw new Error("Something went wrong");
         }
       })
-      .then((res) => {
+      .then(async (res) => {
         // upload images
         for (let i = 0; i < images.length; i++) {
           const data = new FormData();
           data.append("image", images[i], Date.now() + images[i].name);
-          return fetch(
+          await fetch(
             config.api.restaurant.meal.addImage + `?_id=${res.record._id}`,
             {
               method: "POST",
@@ -59,13 +59,14 @@ export const RNewMeal = ({ logout }: { logout: Function }) => {
             }
           ).then((res) => {
             if (res.ok) {
-              toast.success("Images added successfully");
+              toast.success("Image added successfully");
               return res.json();
             } else {
               toast.error("Something went wrong");
             }
           });
         }
+        toast.success("ALl images added successfully");
       });
   };
 
