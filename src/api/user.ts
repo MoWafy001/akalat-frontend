@@ -333,3 +333,29 @@ export const getOrders = (): Promise<any> => {
     return res.json();
   });
 };
+
+export const acceptOrder = (
+  deliveryId: string,
+  restaurantId: string
+): Promise<any> => {
+  const userJSON = localStorage.getItem("user");
+  if (!userJSON) {
+    return Promise.resolve([]);
+  }
+  const user = JSON.parse(userJSON);
+  const userId = user._id;
+
+  return fetch(
+    `${config.api.user.orders.accept}?user=${userId}&delivery=${deliveryId}&restaurant=${restaurantId}`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  ).then(async (res: Response) => {
+    const error = handleErrors(res);
+    if (error) throw await error;
+    return res;
+  });
+};

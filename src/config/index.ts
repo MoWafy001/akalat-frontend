@@ -63,6 +63,7 @@ export const config = {
       orders: {
         list: API_URL + "restaurant/order/list",
         accept: API_URL + "restaurant/order/accepteOrder",
+        applyOrder: API_URL + "restaurant/order/applyOrder",
       },
     },
     // Delivery

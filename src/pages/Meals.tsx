@@ -17,7 +17,7 @@ export const Meals = ({ logout }: { logout: Function }) => {
               name: meal.name,
               rate: "⭐".repeat(meal.rate),
               showTools: true,
-              image: meal.image
+              image: meal.image.length
                 ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                 : undefined,
               cardPagePath: `/meals/${meal._id}`,

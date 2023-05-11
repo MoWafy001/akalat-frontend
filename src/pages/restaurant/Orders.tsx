@@ -1,30 +1,18 @@
 import { useEffect, useState } from "react";
-import { Card } from "../components/Card";
+import { Card } from "../../components/Card";
 import Slider from "react-slick";
-import { acceptOrder, getOrders } from "../api/user";
-import { config } from "../config";
-import { toast } from "react-toastify";
+import { config } from "../../config";
+import { getOrders } from "../../api/restaurant";
 import { useNavigate } from "react-router-dom";
 
-export const Orders = () => {
+export const ROrders = () => {
   const [orders, setOrders] = useState([] as any[]);
   const [activeOrderType, setActiveOrderType] = useState("pending");
   const navigate = useNavigate();
 
-  const handleAcceptOrder = (deliveryId: string, restaurantId: string) => {
+  const assignDelivery = (orderId: string) => {
     return () => {
-      navigate(`/meals`);
-      acceptOrder(deliveryId, restaurantId)
-        .then((data) => {
-          console.log(data);
-          toast.success("Order accepted successfully");
-          navigate(`/orders`);
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error("Error accepting order");
-          navigate(`/orders`);
-        });
+      navigate(`/orders/${orderId}/assign`);
     };
   };
 
@@ -34,10 +22,10 @@ export const Orders = () => {
       setOrders(
         orders.map((order: any) => {
           return {
+            id: order._id,
             status: order.status,
             acceptedUser: order.acceptedUser,
             restaurant: {
-              _id: order.restaurant._id,
               name: order.restaurant.name,
               img:
                 config.api.host +
@@ -130,6 +118,13 @@ export const Orders = () => {
                   </div>
                 )}
 
+                <div className="total">
+                  <span className="total-val">Total: {order.total}</span>
+                  <span className="total-val">
+                    Original Total:{" "}
+                    <span className="sliced">{order.ogTotal}</span>
+                  </span>
+                </div>
                 <div className="date">
                   <span className="date-val">
                     Start Date: {order.startDate}
@@ -152,20 +147,14 @@ export const Orders = () => {
                   ))}
                 </Slider>
 
-                {(order.acceptedUser !== "pending" && (
-                  <span className="status accepted">Accepted</span>
-                )) ||
-                  (order.delivery && (
-                    <span
-                      className="status to-accept"
-                      onClick={handleAcceptOrder(
-                        order.delivery._id,
-                        order.restaurant._id
-                      )}
-                    >
-                      click to accept
-                    </span>
-                  ))}
+                {!order.delivery && (
+                  <span
+                    className="status to-accept"
+                    onClick={assignDelivery(order.id)}
+                  >
+                    Assign Delivery
+                  </span>
+                )}
               </div>
             </div>
           ))}

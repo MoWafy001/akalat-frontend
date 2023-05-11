@@ -73,8 +73,8 @@ export const Card = ({
       )}
       <div className="card-info">
         <div className="card-price">
-          <span>{price}</span>
-          <span className="og-price">{ogPrice}</span>
+          <span>{price ? price + " L.E" : ""}</span>
+          <span className="og-price">{ogPrice ? ogPrice + " L.E" : ""}</span>
         </div>
         <Link
           to={cardPagePath}

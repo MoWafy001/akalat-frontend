@@ -32,7 +32,7 @@ export const Home = ({
               showTools: true,
               price: meal.price,
               ogPrice: meal.originalPrice,
-              image: meal.image
+              image: meal.image.length
                 ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                 : undefined,
               mealId: meal._id,
