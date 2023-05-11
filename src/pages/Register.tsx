@@ -73,9 +73,9 @@ export const Register = () => {
           <input required type="text" name="address" placeholder="address" />
           <input required type="text" name="phone" placeholder="phone" />
         </div>
-        <Link to="/forgot" className="forgot-link">
+        {/* <Link to="/forgot" className="forgot-link">
           Forgot password?
-        </Link>
+        </Link> */}
 
         <button className="auth-button" type="submit">
           Login

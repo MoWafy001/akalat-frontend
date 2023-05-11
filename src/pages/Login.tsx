@@ -51,9 +51,9 @@ export const Login = ({ login }: { login: Function }) => {
           <input type="text" name="email" placeholder="email" />
           <input type="password" name="password" placeholder="password" />
         </div>
-        <Link to="/forgot" className="forgot-link">
+        {/* <Link to="/forgot" className="forgot-link">
           Forgot password?
-        </Link>
+        </Link> */}
 
         <button className="auth-button" type="submit">
           Login
