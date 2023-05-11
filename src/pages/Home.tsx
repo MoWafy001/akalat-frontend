@@ -37,6 +37,7 @@ export const Home = ({
                 : undefined,
               mealId: meal._id,
               cardPagePath: `/meals/${meal._id}`,
+              restaurantName: meal.restaurant && meal.restaurant.name,
             };
           })
         );
@@ -79,6 +80,7 @@ export const Home = ({
                 ? config.api.host + delivery.image.path.replace(/\\/g, "/")
                 : undefined,
               cardPagePath: `/deliveries/${delivery._id}`,
+              restaurantName: delivery.restaurant && delivery.restaurant.name,
             };
           })
         );

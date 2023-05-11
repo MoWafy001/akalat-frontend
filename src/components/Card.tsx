@@ -15,6 +15,7 @@ export const Card = ({
   image,
   mealId,
   cardPagePath,
+  restaurantName,
 }: {
   price?: string;
   ogPrice?: string;
@@ -27,6 +28,7 @@ export const Card = ({
   image?: string;
   mealId?: string;
   cardPagePath: string;
+  restaurantName?: string;
 }) => {
   const [quantity, setQuantity] = useState(1);
 
@@ -86,6 +88,10 @@ export const Card = ({
         >
           {name}
         </Link>
+
+        {restaurantName && <span
+        className="fs-6 text-muted fw-lighter"
+        >{restaurantName}</span>}
 
         {review && (
           <div className="card-review">

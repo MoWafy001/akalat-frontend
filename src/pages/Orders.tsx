@@ -55,6 +55,7 @@ export const Orders = () => {
                 showRemove: false,
                 image: config.api.host + meal.image[0].path.replace(/\\/g, "/"),
                 cardPagePath: `/meals/${meal._id}`,
+                restaurantName: meal.restaurant && meal.restaurant.name,
               };
             }),
             total: order.total,

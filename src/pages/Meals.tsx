@@ -14,12 +14,16 @@ export const Meals = ({ logout }: { logout: Function }) => {
         setMeals(
           data.record.map((meal: any) => {
             return {
+              restaurantName: meal.restaurant && meal.restaurant.name,
               name: meal.name,
               rate: "⭐".repeat(meal.rate),
               showTools: true,
+              price: meal.price,
+              ogPrice: meal.originalPrice,
               image: meal.image.length
                 ? config.api.host + meal.image[0].path.replace(/\\/g, "/")
                 : undefined,
+              mealId: meal._id,
               cardPagePath: `/meals/${meal._id}`,
             };
           })

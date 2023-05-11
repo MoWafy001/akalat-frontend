@@ -21,6 +21,7 @@ export const Deliveries = ({ logout }: { logout: Function }) => {
                 ? config.api.host + delivery.image.path.replace(/\\/g, "/")
                 : undefined,
               cardPagePath: `/deliveries/${delivery._id}`,
+              restaurantName: delivery.restaurant && delivery.restaurant.name,
             };
           })
         );

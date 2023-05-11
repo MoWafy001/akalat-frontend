@@ -109,6 +109,7 @@ export const Cart = ({ logout }: { logout: Function }) => {
               const meal = item.meal;
               return {
                 price: meal.price,
+                restaurantName: meal.restaurant && meal.restaurant.name,
                 ogPrice: meal.originalPrice,
                 name: meal.name,
                 rate: "⭐".repeat(meal.rate),

@@ -41,6 +41,7 @@ export const WishList = () => {
             showRemove: true,
             removeFunction: generateCardRemove(meal._id),
             image: config.api.host + meal.image[0].path.replace(/\\/g, "/"),
+            restaurantName: meal.restaurant && meal.restaurant.name,
           };
         })
       );
