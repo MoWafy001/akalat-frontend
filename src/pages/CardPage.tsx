@@ -80,7 +80,7 @@ export const CardPage = ({ logout }: { logout: Function }) => {
           setData({
             name: record.name,
             rate: "⭐".repeat(record.rate),
-            images: [config.api.host + record.image.path.replace(/\\/g, "/")],
+            images: [config.api.host + record.image?.path.replace(/\\/g, "/")],
             sideInfo: record.address,
           });
         });

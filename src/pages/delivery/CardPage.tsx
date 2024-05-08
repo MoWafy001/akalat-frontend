@@ -61,7 +61,7 @@ export const DCardPage = ({ logout }: { logout: Function }) => {
             setData({
               name: record.name,
               rate: "⭐".repeat(record.rate),
-              images: record.image.map((image: any) => {
+              images: record.image?.map((image: any) => {
                 return config.api.host + image.path.replace(/\\/g, "/");
               }),
               sideInfo: record.restaurant.name,
